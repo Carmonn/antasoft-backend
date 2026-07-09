@@ -1,0 +1,25 @@
+{
+  "nodeModulesDir": "auto",
+  "imports": {
+    "@/": "./src/",
+    "@hono/zod-openapi": "jsr:@hono/zod-openapi@^1.4.0",
+    "@scalar/hono-api-reference": "npm:@scalar/hono-api-reference@^0.11.9",
+    "hono": "jsr:@hono/hono@^4.12.27",
+    "@prisma/adapter-libsql": "npm:@prisma/adapter-libsql@^7.8.0",
+    "@prisma/client": "npm:@prisma/client@^7.8.0",
+    "prisma": "npm:prisma@^7.8.0"
+  },
+  "tasks": {
+    "prisma:generate": "deno run -A --env-file=.env npm:prisma generate",
+    "prisma:migrate": "deno run -A --env-file=.env npm:prisma migrate dev --name init",
+    "prisma:seed": "deno run -A --env-file=.env prisma/seed/seed.ts",
+    "prisma:reset": "deno run -A --env-file=.env npm:prisma migrate reset && deno task prisma:seed",
+    "prisma:studio": "deno run -A --env-file=.env npm:prisma studio",
+    "start": "deno run -A --env-file=.env src/main.ts"
+  },
+  "compilerOptions": {
+    "jsx": "precompile",
+    "jsxImportSource": "hono/jsx"
+  },
+  "allowScripts": ["npm:@prisma/engines@7.8.0", "npm:prisma@7.8.0"]
+}

@@ -1,0 +1,32 @@
+datasource db {
+  provider = "sqlite"
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated"
+}
+
+//---------- Catalogos ----------
+model estados {
+  id          Int    @id @default(autoincrement())
+  clave       Int    @unique
+  nombre      String @unique
+  abreviatura String
+
+  // Relaciones -----
+  municipios municipios[]
+}
+
+model municipios {
+  id        Int    @id @default(autoincrement())
+  estado_id Int
+  clave     Int
+  nombre    String
+
+  // Relaciones -----
+  estado estados @relation(fields: [estado_id], references: [id], onDelete: Cascade)
+
+  // Restricciones -----
+  @@unique([estado_id, clave])
+}
