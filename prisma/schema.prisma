@@ -30,3 +30,11 @@ model municipios {
   // Restricciones -----
   @@unique([estado_id, clave])
 }
+
+model permisos {
+  id            Int     @id @default(autoincrement())
+  nombre        String  @unique
+  descripcion   String
+  identificador String  @unique
+  asignable     Boolean
+}

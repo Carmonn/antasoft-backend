@@ -51,3 +51,8 @@ export type estados = Prisma.estadosModel
  * 
  */
 export type municipios = Prisma.municipiosModel
+/**
+ * Model permisos
+ * 
+ */
+export type permisos = Prisma.permisosModel

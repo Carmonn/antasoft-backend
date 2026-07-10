@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   estados: 'estados',
-  municipios: 'municipios'
+  municipios: 'municipios',
+  permisos: 'permisos'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -86,6 +87,17 @@ export const MunicipiosScalarFieldEnum = {
 } as const
 
 export type MunicipiosScalarFieldEnum = (typeof MunicipiosScalarFieldEnum)[keyof typeof MunicipiosScalarFieldEnum]
+
+
+export const PermisosScalarFieldEnum = {
+  id: 'id',
+  nombre: 'nombre',
+  descripcion: 'descripcion',
+  identificador: 'identificador',
+  asignable: 'asignable'
+} as const
+
+export type PermisosScalarFieldEnum = (typeof PermisosScalarFieldEnum)[keyof typeof PermisosScalarFieldEnum]
 
 
 export const SortOrder = {

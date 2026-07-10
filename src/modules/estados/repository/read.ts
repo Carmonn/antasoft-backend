@@ -40,42 +40,15 @@ export const findEstadoDetailRawById = async (
 /** Lista los estados básicos, opcionalmente filtrando por IDs de alcance. */
 export const listEstadosBasicRaw = async (
   prisma: PrismaClient,
-  opts?: { scopeIds?: number[] },
 ): Promise<EstadoBasicRaw[]> => {
-  if (!opts?.scopeIds) {
-    return await prisma.estados.findMany();
-  }
-
-  return await prisma.estados.findMany({
-    where: {
-      municipios: {
-        some: {
-          id: { in: opts.scopeIds },
-        },
-      },
-    },
-  });
+  return await prisma.estados.findMany();
 };
 
 /** Lista los estados detallados, opcionalmente filtrando por IDs de alcance. */
 export const listEstadosDetailRaw = async (
   prisma: PrismaClient,
-  opts?: { scopeIds?: number[] },
 ): Promise<EstadoDetailRaw[]> => {
-  if (!opts?.scopeIds) {
-    return await prisma.estados.findMany({
-      include: estadoDetailInclude,
-    });
-  }
-
   return await prisma.estados.findMany({
-    where: {
-      municipios: {
-        some: {
-          id: { in: opts.scopeIds },
-        },
-      },
-    },
     include: estadoDetailInclude,
   });
 };

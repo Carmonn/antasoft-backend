@@ -10,4 +10,5 @@
  */
 export type * from './models/estados.ts'
 export type * from './models/municipios.ts'
+export type * from './models/permisos.ts'
 export type * from './commonInputTypes.ts'

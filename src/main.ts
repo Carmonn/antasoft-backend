@@ -9,6 +9,7 @@ import { toApiError } from "@/shared/mapper.ts";
 
 import estadosRoutes from "@/modules/estados/routes/router.ts";
 import municipiosRoutes from "@/modules/municipios/routes/router.ts";
+import permisosRoutes from "@/modules/permisos/routes/router.ts";
 
 // ----- Type Definition on the app -----
 export type AppEnv = { Variables: { prisma: PrismaClient } };
@@ -56,6 +57,7 @@ app.get("/", (c: Context) => {
 
 app.route("/catalogos/estados", estadosRoutes);
 app.route("/catalogos/municipios", municipiosRoutes);
+app.route("/catalogos/permisos", permisosRoutes);
 
 Deno.serve(app.fetch);
 console.log("📄 Docs: http://localhost:8000/docs");

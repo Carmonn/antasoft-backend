@@ -385,7 +385,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   estados: 'estados',
-  municipios: 'municipios'
+  municipios: 'municipios',
+  permisos: 'permisos'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -401,7 +402,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "estados" | "municipios"
+    modelProps: "estados" | "municipios" | "permisos"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -553,6 +554,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    permisos: {
+      payload: Prisma.$permisosPayload<ExtArgs>
+      fields: Prisma.permisosFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.permisosFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$permisosPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.permisosFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$permisosPayload>
+        }
+        findFirst: {
+          args: Prisma.permisosFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$permisosPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.permisosFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$permisosPayload>
+        }
+        findMany: {
+          args: Prisma.permisosFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$permisosPayload>[]
+        }
+        create: {
+          args: Prisma.permisosCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$permisosPayload>
+        }
+        createMany: {
+          args: Prisma.permisosCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.permisosCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$permisosPayload>[]
+        }
+        delete: {
+          args: Prisma.permisosDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$permisosPayload>
+        }
+        update: {
+          args: Prisma.permisosUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$permisosPayload>
+        }
+        deleteMany: {
+          args: Prisma.permisosDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.permisosUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.permisosUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$permisosPayload>[]
+        }
+        upsert: {
+          args: Prisma.permisosUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$permisosPayload>
+        }
+        aggregate: {
+          args: Prisma.PermisosAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePermisos>
+        }
+        groupBy: {
+          args: Prisma.permisosGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PermisosGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.permisosCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PermisosCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -609,6 +684,17 @@ export const MunicipiosScalarFieldEnum = {
 export type MunicipiosScalarFieldEnum = (typeof MunicipiosScalarFieldEnum)[keyof typeof MunicipiosScalarFieldEnum]
 
 
+export const PermisosScalarFieldEnum = {
+  id: 'id',
+  nombre: 'nombre',
+  descripcion: 'descripcion',
+  identificador: 'identificador',
+  asignable: 'asignable'
+} as const
+
+export type PermisosScalarFieldEnum = (typeof PermisosScalarFieldEnum)[keyof typeof PermisosScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -634,6 +720,13 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'String'
  */
 export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -755,6 +848,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   estados?: Prisma.estadosOmit
   municipios?: Prisma.municipiosOmit
+  permisos?: Prisma.permisosOmit
 }
 
 /* Types for Logging */
