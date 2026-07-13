@@ -72,6 +72,11 @@ export type trabajos = Prisma.trabajosModel
  */
 export type estatus_asignaciones = Prisma.estatus_asignacionesModel
 /**
+ * Model estatus_honorarios
+ * 
+ */
+export type estatus_honorarios = Prisma.estatus_honorariosModel
+/**
  * Model personas
  * 
  */

@@ -57,6 +57,11 @@ model estatus_asignaciones {
   nombre String @unique
 }
 
+model estatus_honorarios {
+  id     Int    @id @default(autoincrement())
+  nombre String @unique
+}
+
 //---------- Personas ----------
 model personas {
   id               Int       @id @default(autoincrement())

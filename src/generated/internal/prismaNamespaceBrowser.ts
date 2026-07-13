@@ -57,6 +57,7 @@ export const ModelName = {
   medios: 'medios',
   trabajos: 'trabajos',
   estatus_asignaciones: 'estatus_asignaciones',
+  estatus_honorarios: 'estatus_honorarios',
   personas: 'personas',
   contactos: 'contactos',
   personas_municipios: 'personas_municipios'
@@ -128,6 +129,14 @@ export const Estatus_asignacionesScalarFieldEnum = {
 } as const
 
 export type Estatus_asignacionesScalarFieldEnum = (typeof Estatus_asignacionesScalarFieldEnum)[keyof typeof Estatus_asignacionesScalarFieldEnum]
+
+
+export const Estatus_honorariosScalarFieldEnum = {
+  id: 'id',
+  nombre: 'nombre'
+} as const
+
+export type Estatus_honorariosScalarFieldEnum = (typeof Estatus_honorariosScalarFieldEnum)[keyof typeof Estatus_honorariosScalarFieldEnum]
 
 
 export const PersonasScalarFieldEnum = {
