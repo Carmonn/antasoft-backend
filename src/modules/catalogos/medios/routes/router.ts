@@ -10,10 +10,10 @@ import { getMedioByIdHandler } from "../handlers/index.ts";
 
 const mediosRoutes = new OpenAPIHono<AppEnv>();
 
-//----- GET allPermisos -----
+//----- GET allMedios -----
 mediosRoutes.openapi(getAllMediosRoute, listMediosHandler);
 
-//----- GET permisoById -----
+//----- GET medioById -----
 mediosRoutes.openapi(getMediosByIdRoute, getMedioByIdHandler);
 
 export default mediosRoutes;

@@ -11,6 +11,7 @@ import estadosRoutes from "@/modules/catalogos/estados/routes/router.ts";
 import municipiosRoutes from "@/modules/catalogos/municipios/routes/router.ts";
 import permisosRoutes from "@/modules/catalogos/permisos/routes/router.ts";
 import mediosRoutes from "@/modules/catalogos/medios/routes/router.ts";
+import trabajosRoutes from "@/modules/catalogos/trabajos/routes/router.ts";
 
 // ----- Type Definition on the app -----
 export type AppEnv = { Variables: { prisma: PrismaClient } };
@@ -60,6 +61,7 @@ app.route("/catalogos/estados", estadosRoutes);
 app.route("/catalogos/municipios", municipiosRoutes);
 app.route("/catalogos/permisos", permisosRoutes);
 app.route("/catalogos/medios", mediosRoutes);
+app.route("/catalogos/trabajos", trabajosRoutes);
 
 Deno.serve(app.fetch);
 console.log("📄 Docs: http://localhost:8000/docs");

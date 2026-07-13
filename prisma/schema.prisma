@@ -47,6 +47,11 @@ model medios {
   contactos contactos[]
 }
 
+model trabajos {
+  id     Int    @id @default(autoincrement())
+  nombre String @unique
+}
+
 //---------- Personas ----------
 model personas {
   id               Int       @id @default(autoincrement())

@@ -389,8 +389,6 @@ export const ModelName = {
   permisos: 'permisos',
   medios: 'medios',
   trabajos: 'trabajos',
-  estatus_asignaciones: 'estatus_asignaciones',
-  estatus_honorarios: 'estatus_honorarios',
   personas: 'personas',
   contactos: 'contactos',
   personas_municipios: 'personas_municipios'
@@ -409,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "estados" | "municipios" | "permisos" | "medios" | "trabajos" | "estatus_asignaciones" | "estatus_honorarios" | "personas" | "contactos" | "personas_municipios"
+    modelProps: "estados" | "municipios" | "permisos" | "medios" | "trabajos" | "personas" | "contactos" | "personas_municipios"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -783,154 +781,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    estatus_asignaciones: {
-      payload: Prisma.$estatus_asignacionesPayload<ExtArgs>
-      fields: Prisma.estatus_asignacionesFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.estatus_asignacionesFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_asignacionesPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.estatus_asignacionesFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_asignacionesPayload>
-        }
-        findFirst: {
-          args: Prisma.estatus_asignacionesFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_asignacionesPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.estatus_asignacionesFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_asignacionesPayload>
-        }
-        findMany: {
-          args: Prisma.estatus_asignacionesFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_asignacionesPayload>[]
-        }
-        create: {
-          args: Prisma.estatus_asignacionesCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_asignacionesPayload>
-        }
-        createMany: {
-          args: Prisma.estatus_asignacionesCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.estatus_asignacionesCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_asignacionesPayload>[]
-        }
-        delete: {
-          args: Prisma.estatus_asignacionesDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_asignacionesPayload>
-        }
-        update: {
-          args: Prisma.estatus_asignacionesUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_asignacionesPayload>
-        }
-        deleteMany: {
-          args: Prisma.estatus_asignacionesDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.estatus_asignacionesUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.estatus_asignacionesUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_asignacionesPayload>[]
-        }
-        upsert: {
-          args: Prisma.estatus_asignacionesUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_asignacionesPayload>
-        }
-        aggregate: {
-          args: Prisma.Estatus_asignacionesAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateEstatus_asignaciones>
-        }
-        groupBy: {
-          args: Prisma.estatus_asignacionesGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Estatus_asignacionesGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.estatus_asignacionesCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Estatus_asignacionesCountAggregateOutputType> | number
-        }
-      }
-    }
-    estatus_honorarios: {
-      payload: Prisma.$estatus_honorariosPayload<ExtArgs>
-      fields: Prisma.estatus_honorariosFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.estatus_honorariosFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_honorariosPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.estatus_honorariosFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_honorariosPayload>
-        }
-        findFirst: {
-          args: Prisma.estatus_honorariosFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_honorariosPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.estatus_honorariosFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_honorariosPayload>
-        }
-        findMany: {
-          args: Prisma.estatus_honorariosFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_honorariosPayload>[]
-        }
-        create: {
-          args: Prisma.estatus_honorariosCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_honorariosPayload>
-        }
-        createMany: {
-          args: Prisma.estatus_honorariosCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.estatus_honorariosCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_honorariosPayload>[]
-        }
-        delete: {
-          args: Prisma.estatus_honorariosDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_honorariosPayload>
-        }
-        update: {
-          args: Prisma.estatus_honorariosUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_honorariosPayload>
-        }
-        deleteMany: {
-          args: Prisma.estatus_honorariosDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.estatus_honorariosUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.estatus_honorariosUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_honorariosPayload>[]
-        }
-        upsert: {
-          args: Prisma.estatus_honorariosUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$estatus_honorariosPayload>
-        }
-        aggregate: {
-          args: Prisma.Estatus_honorariosAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateEstatus_honorarios>
-        }
-        groupBy: {
-          args: Prisma.estatus_honorariosGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Estatus_honorariosGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.estatus_honorariosCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Estatus_honorariosCountAggregateOutputType> | number
-        }
-      }
-    }
     personas: {
       payload: Prisma.$personasPayload<ExtArgs>
       fields: Prisma.personasFieldRefs
@@ -1236,22 +1086,6 @@ export const TrabajosScalarFieldEnum = {
 export type TrabajosScalarFieldEnum = (typeof TrabajosScalarFieldEnum)[keyof typeof TrabajosScalarFieldEnum]
 
 
-export const Estatus_asignacionesScalarFieldEnum = {
-  id: 'id',
-  nombre: 'nombre'
-} as const
-
-export type Estatus_asignacionesScalarFieldEnum = (typeof Estatus_asignacionesScalarFieldEnum)[keyof typeof Estatus_asignacionesScalarFieldEnum]
-
-
-export const Estatus_honorariosScalarFieldEnum = {
-  id: 'id',
-  nombre: 'nombre'
-} as const
-
-export type Estatus_honorariosScalarFieldEnum = (typeof Estatus_honorariosScalarFieldEnum)[keyof typeof Estatus_honorariosScalarFieldEnum]
-
-
 export const PersonasScalarFieldEnum = {
   id: 'id',
   alias: 'alias',
@@ -1454,8 +1288,6 @@ export type GlobalOmitConfig = {
   permisos?: Prisma.permisosOmit
   medios?: Prisma.mediosOmit
   trabajos?: Prisma.trabajosOmit
-  estatus_asignaciones?: Prisma.estatus_asignacionesOmit
-  estatus_honorarios?: Prisma.estatus_honorariosOmit
   personas?: Prisma.personasOmit
   contactos?: Prisma.contactosOmit
   personas_municipios?: Prisma.personas_municipiosOmit
