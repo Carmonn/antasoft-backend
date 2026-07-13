@@ -1,127 +1,161 @@
 ```
 # Antasoft Backend API
 
-API backend construida con Deno + Hono + Prisma, enfocada en exponer catálogos de estados y municipios mediante endpoints REST documentados con OpenAPI.
+Backend de Antasoft construido con Deno, Hono y Prisma. Expone endpoints REST con especificación OpenAPI para catálogos del sistema.
+
+## Situación Actual (2026-07-13)
+
+Estado funcional del proyecto:
+
+- API levantando sobre Deno + Hono en puerto 8000.
+- Documentación OpenAPI disponible en /docs.
+- Catálogos activos con rutas de listado y detalle por id:
+	- estados
+	- municipios
+	- permisos
+	- medios
+	- trabajos
+	- estatus de asignaciones
+	- estatus de honorarios
+- Prisma configurado con SQLite/libSQL adapter.
+- Migraciones activas en prisma/migrations (migración inicial aplicada).
+- Seed implementado para catálogos.
+- Modelos de personas/contactos/cobertura definidos en Prisma, pero sin rutas expuestas en la API en este momento.
 
 ## Stack Tecnológico
 
 - Deno 2.x
-- Hono + OpenAPI (zod-openapi)
+- Hono + zod-openapi
 - Prisma ORM 7.x
-- SQLite/libSQL como datasource local
-- Scalar para documentación interactiva
+- @prisma/adapter-libsql
+- SQLite (desarrollo local)
+- Scalar (referencia de API)
 
 ## Requisitos
 
-- Deno instalado (recomendado: versión estable reciente)
-- Archivo de entorno .env en la raíz del proyecto
+- Deno instalado
+- Archivo .env en la raíz del proyecto
 
 ## Variables de Entorno
 
-Crear un archivo .env en la raíz con, al menos:
+Define al menos la URL de base de datos:
 
 ```env
-DATABASE_URL="file:./prisma/dev.db"
+DATABASE_URL="file:./dev.db"
 ```
 
 Notas:
-- Si ya usas otro archivo/localización de SQLite, respeta tu ruta actual.
-- No subas el .env al repositorio (ya está en .gitignore).
 
-## Instalación y Primer Arranque
+- Puedes usar otra ruta SQLite según tu entorno.
+- .env y archivos de base de datos local no deben versionarse.
 
-1. Instalar dependencias y generar cliente Prisma:
+## Cómo Levantar el Proyecto
+
+1. Generar cliente Prisma:
 
 ```bash
 deno task prisma:generate
 ```
 
-2. Ejecutar migraciones:
+2. Aplicar migraciones:
 
 ```bash
 deno task prisma:migrate
 ```
 
-3. Cargar datos semilla:
+3. Poblar catálogos iniciales:
 
 ```bash
 deno task prisma:seed
 ```
 
-4. Levantar el servidor:
+4. Iniciar servidor:
 
 ```bash
 deno task start
 ```
 
-La API corre por defecto en:
-- http://localhost:8000
+Accesos:
 
-Documentación interactiva:
-- http://localhost:8000/docs
-
-OpenAPI JSON:
-- http://localhost:8000/docs/openapi.json
+- API: http://localhost:8000
+- Docs UI: http://localhost:8000/docs
+- OpenAPI JSON: http://localhost:8000/docs/openapi.json
 
 ## Tareas Disponibles
 
-- deno task start: inicia la API
-- deno task prisma:generate: genera el cliente Prisma en src/generated
-- deno task prisma:migrate: crea/aplica migraciones de desarrollo
-- deno task prisma:seed: ejecuta el seed de catálogos
-- deno task prisma:reset: resetea BD, reaplica migraciones y vuelve a sembrar
-- deno task prisma:studio: abre Prisma Studio
+- deno task start
+- deno task prisma:generate
+- deno task prisma:migrate
+- deno task prisma:seed
+- deno task prisma:reset
+- deno task prisma:studio
 
-## Endpoints Principales
+## Endpoints Disponibles
 
-Base URL: /catalogos
+Base path: /catalogos
 
 - GET /catalogos/estados
 - GET /catalogos/estados/:id
 - GET /catalogos/municipios
 - GET /catalogos/municipios/:id
+- GET /catalogos/permisos
+- GET /catalogos/permisos/:id
+- GET /catalogos/medios
+- GET /catalogos/medios/:id
+- GET /catalogos/trabajos
+- GET /catalogos/trabajos/:id
+- GET /catalogos/estatus-asignaciones
+- GET /catalogos/estatus-asignaciones/:id
+- GET /catalogos/estatus-honorarios
+- GET /catalogos/estatus-honorarios/:id
 
-## Estructura del Proyecto
+## Estructura Principal
 
 ```text
 src/
-	main.ts                # bootstrap de app, OpenAPI, middlewares y rutas
+	main.ts
 	modules/
-		estados/             # módulo de catálogo de estados
-		municipios/          # módulo de catálogo de municipios
-	shared/                # utilidades compartidas, errores y mapeadores
-	generated/             # cliente Prisma generado
+		catalogos/
+			estados/
+			municipios/
+			permisos/
+			medios/
+			trabajos/
+			estatusAsignaciones/
+			estatusHonorarios/
+		personas/               # estructura base, no expuesta en main.ts
+	generated/
+	shared/
 
 prisma/
-	schema.prisma          # modelos y datasource
-	migrations/            # historial de migraciones
-	seed/                  # scripts y datos de seed
+	schema.prisma
+	migrations/
+	seed/
+
+postman/                    # colecciones locales (ignorado por git)
 ```
 
 ## Flujo Recomendado de Desarrollo
 
-1. Modificar modelos en prisma/schema.prisma.
+1. Editar prisma/schema.prisma.
 2. Ejecutar deno task prisma:migrate.
-3. Regenerar cliente con deno task prisma:generate (si aplica).
-4. Ajustar módulo/rutas/servicios afectados.
-5. Re-sembrar datos con deno task prisma:seed cuando sea necesario.
+3. Ejecutar deno task prisma:generate.
+4. Implementar/ajustar módulo (schemas, repository, services, handlers, routes).
+5. Actualizar seed si el catálogo lo requiere.
 
-## Solución de Problemas Comunes
+## Troubleshooting
 
-- Error de conexión a base de datos:
-	- Verifica DATABASE_URL y que el archivo SQLite exista o pueda crearse.
-- Cambios de schema no reflejados:
+- Error de conexión a DB:
+	- Verifica DATABASE_URL y permisos de escritura del archivo SQLite.
+- Cliente Prisma desactualizado:
 	- Ejecuta deno task prisma:generate.
-- Seed duplicado o fallando por restricciones:
-	- Usa deno task prisma:reset para reiniciar el estado local.
+- Datos duplicados o inconsistentes en local:
+	- Ejecuta deno task prisma:reset.
 
-## Seguridad y Buenas Prácticas
+## Seguridad
 
-- Mantén .env fuera de control de versiones.
-- No publiques archivos locales de base de datos.
-- Evita commitear dumps, colecciones con secrets o datos sensibles.
-
-## Estado del Proyecto
-
-Proyecto en evolución. Se recomienda mantener convenciones por módulo (routes, handlers, services, repository, schemas) para escalar nuevas funcionalidades con bajo acoplamiento.
+- No commitear .env.
+- No commitear dev.db ni otros archivos SQLite.
+- No commitear dumps ni colecciones con secretos.
+- Mantener postman/ fuera del repositorio si contiene tokens o variables sensibles.
 ```
