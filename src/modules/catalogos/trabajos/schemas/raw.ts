@@ -8,7 +8,7 @@ export const TrabajoRawSchema = z.object({
     description: "Identificador unico del trabajo.",
   }),
   nombre: z.string().trim().min(1).openapi({
-    example: "Ver usuarios",
+    example: "Licencia de funcionamiento",
     description: "Nombre del trabajo.",
   }),
 }) satisfies z.ZodType<Prisma.trabajosModel>;

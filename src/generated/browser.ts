@@ -43,6 +43,11 @@ export type medios = Prisma.mediosModel
  */
 export type trabajos = Prisma.trabajosModel
 /**
+ * Model estatus_asignaciones
+ * 
+ */
+export type estatus_asignaciones = Prisma.estatus_asignacionesModel
+/**
  * Model personas
  * 
  */

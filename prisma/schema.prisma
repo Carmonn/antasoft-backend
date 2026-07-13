@@ -52,6 +52,11 @@ model trabajos {
   nombre String @unique
 }
 
+model estatus_asignaciones {
+  id     Int    @id @default(autoincrement())
+  nombre String @unique
+}
+
 //---------- Personas ----------
 model personas {
   id               Int       @id @default(autoincrement())

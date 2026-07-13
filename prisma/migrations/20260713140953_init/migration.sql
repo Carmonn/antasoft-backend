@@ -37,6 +37,12 @@ CREATE TABLE "trabajos" (
 );
 
 -- CreateTable
+CREATE TABLE "estatus_asignaciones" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "nombre" TEXT NOT NULL
+);
+
+-- CreateTable
 CREATE TABLE "personas" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "alias" TEXT NOT NULL,
@@ -85,6 +91,9 @@ CREATE UNIQUE INDEX "medios_nombre_key" ON "medios"("nombre");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "trabajos_nombre_key" ON "trabajos"("nombre");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "estatus_asignaciones_nombre_key" ON "estatus_asignaciones"("nombre");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "personas_alias_nombre_apellido_paterno_apellido_materno_key" ON "personas"("alias", "nombre", "apellido_paterno", "apellido_materno");
