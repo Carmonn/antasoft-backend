@@ -32,3 +32,38 @@ export type municipios = Prisma.municipiosModel
  * 
  */
 export type permisos = Prisma.permisosModel
+/**
+ * Model medios
+ * 
+ */
+export type medios = Prisma.mediosModel
+/**
+ * Model trabajos
+ * 
+ */
+export type trabajos = Prisma.trabajosModel
+/**
+ * Model estatus_asignaciones
+ * 
+ */
+export type estatus_asignaciones = Prisma.estatus_asignacionesModel
+/**
+ * Model estatus_honorarios
+ * 
+ */
+export type estatus_honorarios = Prisma.estatus_honorariosModel
+/**
+ * Model personas
+ * 
+ */
+export type personas = Prisma.personasModel
+/**
+ * Model contactos
+ * 
+ */
+export type contactos = Prisma.contactosModel
+/**
+ * Model personas_municipios
+ * 
+ */
+export type personas_municipios = Prisma.personas_municipiosModel

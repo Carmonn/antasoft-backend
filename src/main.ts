@@ -7,9 +7,10 @@ import { Scalar } from "@scalar/hono-api-reference";
 import { AppError } from "./shared/AppError.ts";
 import { toApiError } from "@/shared/mapper.ts";
 
-import estadosRoutes from "@/modules/estados/routes/router.ts";
-import municipiosRoutes from "@/modules/municipios/routes/router.ts";
-import permisosRoutes from "@/modules/permisos/routes/router.ts";
+import estadosRoutes from "@/modules/catalogos/estados/routes/router.ts";
+import municipiosRoutes from "@/modules/catalogos/municipios/routes/router.ts";
+import permisosRoutes from "@/modules/catalogos/permisos/routes/router.ts";
+import mediosRoutes from "@/modules/catalogos/medios/routes/router.ts";
 
 // ----- Type Definition on the app -----
 export type AppEnv = { Variables: { prisma: PrismaClient } };
@@ -58,6 +59,7 @@ app.get("/", (c: Context) => {
 app.route("/catalogos/estados", estadosRoutes);
 app.route("/catalogos/municipios", municipiosRoutes);
 app.route("/catalogos/permisos", permisosRoutes);
+app.route("/catalogos/medios", mediosRoutes);
 
 Deno.serve(app.fetch);
 console.log("📄 Docs: http://localhost:8000/docs");

@@ -217,6 +217,7 @@ export type municipiosWhereInput = {
   clave?: Prisma.IntFilter<"municipios"> | number
   nombre?: Prisma.StringFilter<"municipios"> | string
   estado?: Prisma.XOR<Prisma.EstadosScalarRelationFilter, Prisma.estadosWhereInput>
+  personasMunicipios?: Prisma.Personas_municipiosListRelationFilter
 }
 
 export type municipiosOrderByWithRelationInput = {
@@ -225,6 +226,7 @@ export type municipiosOrderByWithRelationInput = {
   clave?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   estado?: Prisma.estadosOrderByWithRelationInput
+  personasMunicipios?: Prisma.personas_municipiosOrderByRelationAggregateInput
 }
 
 export type municipiosWhereUniqueInput = Prisma.AtLeast<{
@@ -237,6 +239,7 @@ export type municipiosWhereUniqueInput = Prisma.AtLeast<{
   clave?: Prisma.IntFilter<"municipios"> | number
   nombre?: Prisma.StringFilter<"municipios"> | string
   estado?: Prisma.XOR<Prisma.EstadosScalarRelationFilter, Prisma.estadosWhereInput>
+  personasMunicipios?: Prisma.Personas_municipiosListRelationFilter
 }, "id" | "estado_id_clave">
 
 export type municipiosOrderByWithAggregationInput = {
@@ -265,6 +268,7 @@ export type municipiosCreateInput = {
   clave: number
   nombre: string
   estado: Prisma.estadosCreateNestedOneWithoutMunicipiosInput
+  personasMunicipios?: Prisma.personas_municipiosCreateNestedManyWithoutMunicipioInput
 }
 
 export type municipiosUncheckedCreateInput = {
@@ -272,12 +276,14 @@ export type municipiosUncheckedCreateInput = {
   estado_id: number
   clave: number
   nombre: string
+  personasMunicipios?: Prisma.personas_municipiosUncheckedCreateNestedManyWithoutMunicipioInput
 }
 
 export type municipiosUpdateInput = {
   clave?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.estadosUpdateOneRequiredWithoutMunicipiosNestedInput
+  personasMunicipios?: Prisma.personas_municipiosUpdateManyWithoutMunicipioNestedInput
 }
 
 export type municipiosUncheckedUpdateInput = {
@@ -285,6 +291,7 @@ export type municipiosUncheckedUpdateInput = {
   estado_id?: Prisma.IntFieldUpdateOperationsInput | number
   clave?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  personasMunicipios?: Prisma.personas_municipiosUncheckedUpdateManyWithoutMunicipioNestedInput
 }
 
 export type municipiosCreateManyInput = {
@@ -354,6 +361,11 @@ export type municipiosSumOrderByAggregateInput = {
   clave?: Prisma.SortOrder
 }
 
+export type MunicipiosScalarRelationFilter = {
+  is?: Prisma.municipiosWhereInput
+  isNot?: Prisma.municipiosWhereInput
+}
+
 export type municipiosCreateNestedManyWithoutEstadoInput = {
   create?: Prisma.XOR<Prisma.municipiosCreateWithoutEstadoInput, Prisma.municipiosUncheckedCreateWithoutEstadoInput> | Prisma.municipiosCreateWithoutEstadoInput[] | Prisma.municipiosUncheckedCreateWithoutEstadoInput[]
   connectOrCreate?: Prisma.municipiosCreateOrConnectWithoutEstadoInput | Prisma.municipiosCreateOrConnectWithoutEstadoInput[]
@@ -396,15 +408,31 @@ export type municipiosUncheckedUpdateManyWithoutEstadoNestedInput = {
   deleteMany?: Prisma.municipiosScalarWhereInput | Prisma.municipiosScalarWhereInput[]
 }
 
+export type municipiosCreateNestedOneWithoutPersonasMunicipiosInput = {
+  create?: Prisma.XOR<Prisma.municipiosCreateWithoutPersonasMunicipiosInput, Prisma.municipiosUncheckedCreateWithoutPersonasMunicipiosInput>
+  connectOrCreate?: Prisma.municipiosCreateOrConnectWithoutPersonasMunicipiosInput
+  connect?: Prisma.municipiosWhereUniqueInput
+}
+
+export type municipiosUpdateOneRequiredWithoutPersonasMunicipiosNestedInput = {
+  create?: Prisma.XOR<Prisma.municipiosCreateWithoutPersonasMunicipiosInput, Prisma.municipiosUncheckedCreateWithoutPersonasMunicipiosInput>
+  connectOrCreate?: Prisma.municipiosCreateOrConnectWithoutPersonasMunicipiosInput
+  upsert?: Prisma.municipiosUpsertWithoutPersonasMunicipiosInput
+  connect?: Prisma.municipiosWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.municipiosUpdateToOneWithWhereWithoutPersonasMunicipiosInput, Prisma.municipiosUpdateWithoutPersonasMunicipiosInput>, Prisma.municipiosUncheckedUpdateWithoutPersonasMunicipiosInput>
+}
+
 export type municipiosCreateWithoutEstadoInput = {
   clave: number
   nombre: string
+  personasMunicipios?: Prisma.personas_municipiosCreateNestedManyWithoutMunicipioInput
 }
 
 export type municipiosUncheckedCreateWithoutEstadoInput = {
   id?: number
   clave: number
   nombre: string
+  personasMunicipios?: Prisma.personas_municipiosUncheckedCreateNestedManyWithoutMunicipioInput
 }
 
 export type municipiosCreateOrConnectWithoutEstadoInput = {
@@ -442,6 +470,48 @@ export type municipiosScalarWhereInput = {
   nombre?: Prisma.StringFilter<"municipios"> | string
 }
 
+export type municipiosCreateWithoutPersonasMunicipiosInput = {
+  clave: number
+  nombre: string
+  estado: Prisma.estadosCreateNestedOneWithoutMunicipiosInput
+}
+
+export type municipiosUncheckedCreateWithoutPersonasMunicipiosInput = {
+  id?: number
+  estado_id: number
+  clave: number
+  nombre: string
+}
+
+export type municipiosCreateOrConnectWithoutPersonasMunicipiosInput = {
+  where: Prisma.municipiosWhereUniqueInput
+  create: Prisma.XOR<Prisma.municipiosCreateWithoutPersonasMunicipiosInput, Prisma.municipiosUncheckedCreateWithoutPersonasMunicipiosInput>
+}
+
+export type municipiosUpsertWithoutPersonasMunicipiosInput = {
+  update: Prisma.XOR<Prisma.municipiosUpdateWithoutPersonasMunicipiosInput, Prisma.municipiosUncheckedUpdateWithoutPersonasMunicipiosInput>
+  create: Prisma.XOR<Prisma.municipiosCreateWithoutPersonasMunicipiosInput, Prisma.municipiosUncheckedCreateWithoutPersonasMunicipiosInput>
+  where?: Prisma.municipiosWhereInput
+}
+
+export type municipiosUpdateToOneWithWhereWithoutPersonasMunicipiosInput = {
+  where?: Prisma.municipiosWhereInput
+  data: Prisma.XOR<Prisma.municipiosUpdateWithoutPersonasMunicipiosInput, Prisma.municipiosUncheckedUpdateWithoutPersonasMunicipiosInput>
+}
+
+export type municipiosUpdateWithoutPersonasMunicipiosInput = {
+  clave?: Prisma.IntFieldUpdateOperationsInput | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.estadosUpdateOneRequiredWithoutMunicipiosNestedInput
+}
+
+export type municipiosUncheckedUpdateWithoutPersonasMunicipiosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  estado_id?: Prisma.IntFieldUpdateOperationsInput | number
+  clave?: Prisma.IntFieldUpdateOperationsInput | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
 export type municipiosCreateManyEstadoInput = {
   id?: number
   clave: number
@@ -451,12 +521,14 @@ export type municipiosCreateManyEstadoInput = {
 export type municipiosUpdateWithoutEstadoInput = {
   clave?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  personasMunicipios?: Prisma.personas_municipiosUpdateManyWithoutMunicipioNestedInput
 }
 
 export type municipiosUncheckedUpdateWithoutEstadoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   clave?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  personasMunicipios?: Prisma.personas_municipiosUncheckedUpdateManyWithoutMunicipioNestedInput
 }
 
 export type municipiosUncheckedUpdateManyWithoutEstadoInput = {
@@ -466,6 +538,35 @@ export type municipiosUncheckedUpdateManyWithoutEstadoInput = {
 }
 
 
+/**
+ * Count Type MunicipiosCountOutputType
+ */
+
+export type MunicipiosCountOutputType = {
+  personasMunicipios: number
+}
+
+export type MunicipiosCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  personasMunicipios?: boolean | MunicipiosCountOutputTypeCountPersonasMunicipiosArgs
+}
+
+/**
+ * MunicipiosCountOutputType without action
+ */
+export type MunicipiosCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MunicipiosCountOutputType
+   */
+  select?: Prisma.MunicipiosCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * MunicipiosCountOutputType without action
+ */
+export type MunicipiosCountOutputTypeCountPersonasMunicipiosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.personas_municipiosWhereInput
+}
+
 
 export type municipiosSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -473,6 +574,8 @@ export type municipiosSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   clave?: boolean
   nombre?: boolean
   estado?: boolean | Prisma.estadosDefaultArgs<ExtArgs>
+  personasMunicipios?: boolean | Prisma.municipios$personasMunicipiosArgs<ExtArgs>
+  _count?: boolean | Prisma.MunicipiosCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["municipios"]>
 
 export type municipiosSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -501,6 +604,8 @@ export type municipiosSelectScalar = {
 export type municipiosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "estado_id" | "clave" | "nombre", ExtArgs["result"]["municipios"]>
 export type municipiosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   estado?: boolean | Prisma.estadosDefaultArgs<ExtArgs>
+  personasMunicipios?: boolean | Prisma.municipios$personasMunicipiosArgs<ExtArgs>
+  _count?: boolean | Prisma.MunicipiosCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type municipiosIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   estado?: boolean | Prisma.estadosDefaultArgs<ExtArgs>
@@ -513,6 +618,7 @@ export type $municipiosPayload<ExtArgs extends runtime.Types.Extensions.Internal
   name: "municipios"
   objects: {
     estado: Prisma.$estadosPayload<ExtArgs>
+    personasMunicipios: Prisma.$personas_municipiosPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -914,6 +1020,7 @@ readonly fields: municipiosFieldRefs;
 export interface Prisma__municipiosClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   estado<T extends Prisma.estadosDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.estadosDefaultArgs<ExtArgs>>): Prisma.Prisma__estadosClient<runtime.Types.Result.GetResult<Prisma.$estadosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  personasMunicipios<T extends Prisma.municipios$personasMunicipiosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.municipios$personasMunicipiosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$personas_municipiosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1343,6 +1450,30 @@ export type municipiosDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many municipios to delete.
    */
   limit?: number
+}
+
+/**
+ * municipios.personasMunicipios
+ */
+export type municipios$personasMunicipiosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the personas_municipios
+   */
+  select?: Prisma.personas_municipiosSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the personas_municipios
+   */
+  omit?: Prisma.personas_municipiosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.personas_municipiosInclude<ExtArgs> | null
+  where?: Prisma.personas_municipiosWhereInput
+  orderBy?: Prisma.personas_municipiosOrderByWithRelationInput | Prisma.personas_municipiosOrderByWithRelationInput[]
+  cursor?: Prisma.personas_municipiosWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Personas_municipiosScalarFieldEnum | Prisma.Personas_municipiosScalarFieldEnum[]
 }
 
 /**

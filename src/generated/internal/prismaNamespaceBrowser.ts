@@ -53,7 +53,14 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   estados: 'estados',
   municipios: 'municipios',
-  permisos: 'permisos'
+  permisos: 'permisos',
+  medios: 'medios',
+  trabajos: 'trabajos',
+  estatus_asignaciones: 'estatus_asignaciones',
+  estatus_honorarios: 'estatus_honorarios',
+  personas: 'personas',
+  contactos: 'contactos',
+  personas_municipios: 'personas_municipios'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -100,10 +107,81 @@ export const PermisosScalarFieldEnum = {
 export type PermisosScalarFieldEnum = (typeof PermisosScalarFieldEnum)[keyof typeof PermisosScalarFieldEnum]
 
 
+export const MediosScalarFieldEnum = {
+  id: 'id',
+  nombre: 'nombre'
+} as const
+
+export type MediosScalarFieldEnum = (typeof MediosScalarFieldEnum)[keyof typeof MediosScalarFieldEnum]
+
+
+export const TrabajosScalarFieldEnum = {
+  id: 'id',
+  nombre: 'nombre'
+} as const
+
+export type TrabajosScalarFieldEnum = (typeof TrabajosScalarFieldEnum)[keyof typeof TrabajosScalarFieldEnum]
+
+
+export const Estatus_asignacionesScalarFieldEnum = {
+  id: 'id',
+  nombre: 'nombre'
+} as const
+
+export type Estatus_asignacionesScalarFieldEnum = (typeof Estatus_asignacionesScalarFieldEnum)[keyof typeof Estatus_asignacionesScalarFieldEnum]
+
+
+export const Estatus_honorariosScalarFieldEnum = {
+  id: 'id',
+  nombre: 'nombre'
+} as const
+
+export type Estatus_honorariosScalarFieldEnum = (typeof Estatus_honorariosScalarFieldEnum)[keyof typeof Estatus_honorariosScalarFieldEnum]
+
+
+export const PersonasScalarFieldEnum = {
+  id: 'id',
+  alias: 'alias',
+  nombre: 'nombre',
+  apellido_paterno: 'apellido_paterno',
+  apellido_materno: 'apellido_materno',
+  fecha_nacimiento: 'fecha_nacimiento'
+} as const
+
+export type PersonasScalarFieldEnum = (typeof PersonasScalarFieldEnum)[keyof typeof PersonasScalarFieldEnum]
+
+
+export const ContactosScalarFieldEnum = {
+  id: 'id',
+  medio_id: 'medio_id',
+  persona_id: 'persona_id',
+  valor: 'valor'
+} as const
+
+export type ContactosScalarFieldEnum = (typeof ContactosScalarFieldEnum)[keyof typeof ContactosScalarFieldEnum]
+
+
+export const Personas_municipiosScalarFieldEnum = {
+  id: 'id',
+  persona_id: 'persona_id',
+  municipio_id: 'municipio_id'
+} as const
+
+export type Personas_municipiosScalarFieldEnum = (typeof Personas_municipiosScalarFieldEnum)[keyof typeof Personas_municipiosScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

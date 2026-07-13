@@ -25,7 +25,8 @@ model municipios {
   nombre    String
 
   // Relaciones -----
-  estado estados @relation(fields: [estado_id], references: [id], onDelete: Cascade)
+  estado             estados               @relation(fields: [estado_id], references: [id], onDelete: Cascade)
+  personasMunicipios personas_municipios[]
 
   // Restricciones -----
   @@unique([estado_id, clave])
@@ -37,4 +38,51 @@ model permisos {
   descripcion   String
   identificador String  @unique
   asignable     Boolean
+}
+
+model medios {
+  id     Int    @id @default(autoincrement())
+  nombre String @unique
+
+  contactos contactos[]
+}
+
+//---------- Personas ----------
+model personas {
+  id               Int       @id @default(autoincrement())
+  alias            String
+  nombre           String
+  apellido_paterno String?
+  apellido_materno String?
+  fecha_nacimiento DateTime?
+
+  contactos contactos[]
+  cobertura personas_municipios[]
+
+  @@unique([alias, nombre, apellido_paterno, apellido_materno])
+}
+
+model contactos {
+  id         Int    @id @default(autoincrement())
+  medio_id   Int
+  persona_id Int
+  valor      String
+
+  medio   medios   @relation(fields: [medio_id], references: [id])
+  persona personas @relation(fields: [persona_id], references: [id], onDelete: Cascade)
+
+  @@unique([medio_id, persona_id, valor])
+  @@index([persona_id])
+}
+
+model personas_municipios {
+  id           Int @id @default(autoincrement())
+  persona_id   Int
+  municipio_id Int
+
+  municipio municipios @relation(fields: [municipio_id], references: [id])
+  persona   personas   @relation(fields: [persona_id], references: [id], onDelete: Cascade)
+
+  @@unique([persona_id, municipio_id])
+  @@index([municipio_id])
 }
