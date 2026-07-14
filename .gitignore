@@ -26,6 +26,8 @@ pnpm-debug.log*
 
 # Dependency folders
 node_modules/
+generated/
+src/generated/
 
 # Build / coverage artifacts
 dist/
