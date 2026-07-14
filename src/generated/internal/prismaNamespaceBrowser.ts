@@ -60,7 +60,11 @@ export const ModelName = {
   estatus_honorarios: 'estatus_honorarios',
   personas: 'personas',
   contactos: 'contactos',
-  personas_municipios: 'personas_municipios'
+  personas_municipios: 'personas_municipios',
+  usuarios: 'usuarios',
+  usuarios_permisos: 'usuarios_permisos',
+  roles: 'roles',
+  roles_permisos: 'roles_permisos'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -168,6 +172,46 @@ export const Personas_municipiosScalarFieldEnum = {
 } as const
 
 export type Personas_municipiosScalarFieldEnum = (typeof Personas_municipiosScalarFieldEnum)[keyof typeof Personas_municipiosScalarFieldEnum]
+
+
+export const UsuariosScalarFieldEnum = {
+  id: 'id',
+  persona_id: 'persona_id',
+  rol_id: 'rol_id',
+  correo: 'correo',
+  contrasena: 'contrasena',
+  fecha_acceso: 'fecha_acceso',
+  refresh_token: 'refresh_token'
+} as const
+
+export type UsuariosScalarFieldEnum = (typeof UsuariosScalarFieldEnum)[keyof typeof UsuariosScalarFieldEnum]
+
+
+export const Usuarios_permisosScalarFieldEnum = {
+  id: 'id',
+  usuario_id: 'usuario_id',
+  permiso_id: 'permiso_id'
+} as const
+
+export type Usuarios_permisosScalarFieldEnum = (typeof Usuarios_permisosScalarFieldEnum)[keyof typeof Usuarios_permisosScalarFieldEnum]
+
+
+export const RolesScalarFieldEnum = {
+  id: 'id',
+  nombre: 'nombre',
+  asignable: 'asignable'
+} as const
+
+export type RolesScalarFieldEnum = (typeof RolesScalarFieldEnum)[keyof typeof RolesScalarFieldEnum]
+
+
+export const Roles_permisosScalarFieldEnum = {
+  id: 'id',
+  permiso_id: 'permiso_id',
+  rol_id: 'rol_id'
+} as const
+
+export type Roles_permisosScalarFieldEnum = (typeof Roles_permisosScalarFieldEnum)[keyof typeof Roles_permisosScalarFieldEnum]
 
 
 export const SortOrder = {

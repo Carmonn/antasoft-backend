@@ -226,6 +226,7 @@ export type personasWhereInput = {
   fecha_nacimiento?: Prisma.DateTimeNullableFilter<"personas"> | Date | string | null
   contactos?: Prisma.ContactosListRelationFilter
   cobertura?: Prisma.Personas_municipiosListRelationFilter
+  usuarios?: Prisma.XOR<Prisma.UsuariosNullableScalarRelationFilter, Prisma.usuariosWhereInput> | null
 }
 
 export type personasOrderByWithRelationInput = {
@@ -237,6 +238,7 @@ export type personasOrderByWithRelationInput = {
   fecha_nacimiento?: Prisma.SortOrderInput | Prisma.SortOrder
   contactos?: Prisma.contactosOrderByRelationAggregateInput
   cobertura?: Prisma.personas_municipiosOrderByRelationAggregateInput
+  usuarios?: Prisma.usuariosOrderByWithRelationInput
 }
 
 export type personasWhereUniqueInput = Prisma.AtLeast<{
@@ -252,6 +254,7 @@ export type personasWhereUniqueInput = Prisma.AtLeast<{
   fecha_nacimiento?: Prisma.DateTimeNullableFilter<"personas"> | Date | string | null
   contactos?: Prisma.ContactosListRelationFilter
   cobertura?: Prisma.Personas_municipiosListRelationFilter
+  usuarios?: Prisma.XOR<Prisma.UsuariosNullableScalarRelationFilter, Prisma.usuariosWhereInput> | null
 }, "id" | "alias_nombre_apellido_paterno_apellido_materno">
 
 export type personasOrderByWithAggregationInput = {
@@ -288,6 +291,7 @@ export type personasCreateInput = {
   fecha_nacimiento?: Date | string | null
   contactos?: Prisma.contactosCreateNestedManyWithoutPersonaInput
   cobertura?: Prisma.personas_municipiosCreateNestedManyWithoutPersonaInput
+  usuarios?: Prisma.usuariosCreateNestedOneWithoutPersonaInput
 }
 
 export type personasUncheckedCreateInput = {
@@ -299,6 +303,7 @@ export type personasUncheckedCreateInput = {
   fecha_nacimiento?: Date | string | null
   contactos?: Prisma.contactosUncheckedCreateNestedManyWithoutPersonaInput
   cobertura?: Prisma.personas_municipiosUncheckedCreateNestedManyWithoutPersonaInput
+  usuarios?: Prisma.usuariosUncheckedCreateNestedOneWithoutPersonaInput
 }
 
 export type personasUpdateInput = {
@@ -309,6 +314,7 @@ export type personasUpdateInput = {
   fecha_nacimiento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   contactos?: Prisma.contactosUpdateManyWithoutPersonaNestedInput
   cobertura?: Prisma.personas_municipiosUpdateManyWithoutPersonaNestedInput
+  usuarios?: Prisma.usuariosUpdateOneWithoutPersonaNestedInput
 }
 
 export type personasUncheckedUpdateInput = {
@@ -320,6 +326,7 @@ export type personasUncheckedUpdateInput = {
   fecha_nacimiento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   contactos?: Prisma.contactosUncheckedUpdateManyWithoutPersonaNestedInput
   cobertura?: Prisma.personas_municipiosUncheckedUpdateManyWithoutPersonaNestedInput
+  usuarios?: Prisma.usuariosUncheckedUpdateOneWithoutPersonaNestedInput
 }
 
 export type personasCreateManyInput = {
@@ -431,6 +438,20 @@ export type personasUpdateOneRequiredWithoutCoberturaNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.personasUpdateToOneWithWhereWithoutCoberturaInput, Prisma.personasUpdateWithoutCoberturaInput>, Prisma.personasUncheckedUpdateWithoutCoberturaInput>
 }
 
+export type personasCreateNestedOneWithoutUsuariosInput = {
+  create?: Prisma.XOR<Prisma.personasCreateWithoutUsuariosInput, Prisma.personasUncheckedCreateWithoutUsuariosInput>
+  connectOrCreate?: Prisma.personasCreateOrConnectWithoutUsuariosInput
+  connect?: Prisma.personasWhereUniqueInput
+}
+
+export type personasUpdateOneRequiredWithoutUsuariosNestedInput = {
+  create?: Prisma.XOR<Prisma.personasCreateWithoutUsuariosInput, Prisma.personasUncheckedCreateWithoutUsuariosInput>
+  connectOrCreate?: Prisma.personasCreateOrConnectWithoutUsuariosInput
+  upsert?: Prisma.personasUpsertWithoutUsuariosInput
+  connect?: Prisma.personasWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.personasUpdateToOneWithWhereWithoutUsuariosInput, Prisma.personasUpdateWithoutUsuariosInput>, Prisma.personasUncheckedUpdateWithoutUsuariosInput>
+}
+
 export type personasCreateWithoutContactosInput = {
   alias: string
   nombre: string
@@ -438,6 +459,7 @@ export type personasCreateWithoutContactosInput = {
   apellido_materno?: string | null
   fecha_nacimiento?: Date | string | null
   cobertura?: Prisma.personas_municipiosCreateNestedManyWithoutPersonaInput
+  usuarios?: Prisma.usuariosCreateNestedOneWithoutPersonaInput
 }
 
 export type personasUncheckedCreateWithoutContactosInput = {
@@ -448,6 +470,7 @@ export type personasUncheckedCreateWithoutContactosInput = {
   apellido_materno?: string | null
   fecha_nacimiento?: Date | string | null
   cobertura?: Prisma.personas_municipiosUncheckedCreateNestedManyWithoutPersonaInput
+  usuarios?: Prisma.usuariosUncheckedCreateNestedOneWithoutPersonaInput
 }
 
 export type personasCreateOrConnectWithoutContactosInput = {
@@ -473,6 +496,7 @@ export type personasUpdateWithoutContactosInput = {
   apellido_materno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_nacimiento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cobertura?: Prisma.personas_municipiosUpdateManyWithoutPersonaNestedInput
+  usuarios?: Prisma.usuariosUpdateOneWithoutPersonaNestedInput
 }
 
 export type personasUncheckedUpdateWithoutContactosInput = {
@@ -483,6 +507,7 @@ export type personasUncheckedUpdateWithoutContactosInput = {
   apellido_materno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_nacimiento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cobertura?: Prisma.personas_municipiosUncheckedUpdateManyWithoutPersonaNestedInput
+  usuarios?: Prisma.usuariosUncheckedUpdateOneWithoutPersonaNestedInput
 }
 
 export type personasCreateWithoutCoberturaInput = {
@@ -492,6 +517,7 @@ export type personasCreateWithoutCoberturaInput = {
   apellido_materno?: string | null
   fecha_nacimiento?: Date | string | null
   contactos?: Prisma.contactosCreateNestedManyWithoutPersonaInput
+  usuarios?: Prisma.usuariosCreateNestedOneWithoutPersonaInput
 }
 
 export type personasUncheckedCreateWithoutCoberturaInput = {
@@ -502,6 +528,7 @@ export type personasUncheckedCreateWithoutCoberturaInput = {
   apellido_materno?: string | null
   fecha_nacimiento?: Date | string | null
   contactos?: Prisma.contactosUncheckedCreateNestedManyWithoutPersonaInput
+  usuarios?: Prisma.usuariosUncheckedCreateNestedOneWithoutPersonaInput
 }
 
 export type personasCreateOrConnectWithoutCoberturaInput = {
@@ -527,6 +554,7 @@ export type personasUpdateWithoutCoberturaInput = {
   apellido_materno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_nacimiento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   contactos?: Prisma.contactosUpdateManyWithoutPersonaNestedInput
+  usuarios?: Prisma.usuariosUpdateOneWithoutPersonaNestedInput
 }
 
 export type personasUncheckedUpdateWithoutCoberturaInput = {
@@ -537,6 +565,65 @@ export type personasUncheckedUpdateWithoutCoberturaInput = {
   apellido_materno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_nacimiento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   contactos?: Prisma.contactosUncheckedUpdateManyWithoutPersonaNestedInput
+  usuarios?: Prisma.usuariosUncheckedUpdateOneWithoutPersonaNestedInput
+}
+
+export type personasCreateWithoutUsuariosInput = {
+  alias: string
+  nombre: string
+  apellido_paterno?: string | null
+  apellido_materno?: string | null
+  fecha_nacimiento?: Date | string | null
+  contactos?: Prisma.contactosCreateNestedManyWithoutPersonaInput
+  cobertura?: Prisma.personas_municipiosCreateNestedManyWithoutPersonaInput
+}
+
+export type personasUncheckedCreateWithoutUsuariosInput = {
+  id?: number
+  alias: string
+  nombre: string
+  apellido_paterno?: string | null
+  apellido_materno?: string | null
+  fecha_nacimiento?: Date | string | null
+  contactos?: Prisma.contactosUncheckedCreateNestedManyWithoutPersonaInput
+  cobertura?: Prisma.personas_municipiosUncheckedCreateNestedManyWithoutPersonaInput
+}
+
+export type personasCreateOrConnectWithoutUsuariosInput = {
+  where: Prisma.personasWhereUniqueInput
+  create: Prisma.XOR<Prisma.personasCreateWithoutUsuariosInput, Prisma.personasUncheckedCreateWithoutUsuariosInput>
+}
+
+export type personasUpsertWithoutUsuariosInput = {
+  update: Prisma.XOR<Prisma.personasUpdateWithoutUsuariosInput, Prisma.personasUncheckedUpdateWithoutUsuariosInput>
+  create: Prisma.XOR<Prisma.personasCreateWithoutUsuariosInput, Prisma.personasUncheckedCreateWithoutUsuariosInput>
+  where?: Prisma.personasWhereInput
+}
+
+export type personasUpdateToOneWithWhereWithoutUsuariosInput = {
+  where?: Prisma.personasWhereInput
+  data: Prisma.XOR<Prisma.personasUpdateWithoutUsuariosInput, Prisma.personasUncheckedUpdateWithoutUsuariosInput>
+}
+
+export type personasUpdateWithoutUsuariosInput = {
+  alias?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  apellido_paterno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  apellido_materno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_nacimiento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contactos?: Prisma.contactosUpdateManyWithoutPersonaNestedInput
+  cobertura?: Prisma.personas_municipiosUpdateManyWithoutPersonaNestedInput
+}
+
+export type personasUncheckedUpdateWithoutUsuariosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  alias?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  apellido_paterno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  apellido_materno?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_nacimiento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contactos?: Prisma.contactosUncheckedUpdateManyWithoutPersonaNestedInput
+  cobertura?: Prisma.personas_municipiosUncheckedUpdateManyWithoutPersonaNestedInput
 }
 
 
@@ -588,6 +675,7 @@ export type personasSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   fecha_nacimiento?: boolean
   contactos?: boolean | Prisma.personas$contactosArgs<ExtArgs>
   cobertura?: boolean | Prisma.personas$coberturaArgs<ExtArgs>
+  usuarios?: boolean | Prisma.personas$usuariosArgs<ExtArgs>
   _count?: boolean | Prisma.PersonasCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["personas"]>
 
@@ -622,6 +710,7 @@ export type personasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type personasInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   contactos?: boolean | Prisma.personas$contactosArgs<ExtArgs>
   cobertura?: boolean | Prisma.personas$coberturaArgs<ExtArgs>
+  usuarios?: boolean | Prisma.personas$usuariosArgs<ExtArgs>
   _count?: boolean | Prisma.PersonasCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type personasIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -632,6 +721,7 @@ export type $personasPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     contactos: Prisma.$contactosPayload<ExtArgs>[]
     cobertura: Prisma.$personas_municipiosPayload<ExtArgs>[]
+    usuarios: Prisma.$usuariosPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1036,6 +1126,7 @@ export interface Prisma__personasClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   contactos<T extends Prisma.personas$contactosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.personas$contactosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$contactosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cobertura<T extends Prisma.personas$coberturaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.personas$coberturaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$personas_municipiosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  usuarios<T extends Prisma.personas$usuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.personas$usuariosArgs<ExtArgs>>): Prisma.Prisma__usuariosClient<runtime.Types.Result.GetResult<Prisma.$usuariosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1507,6 +1598,25 @@ export type personas$coberturaArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.Personas_municipiosScalarFieldEnum | Prisma.Personas_municipiosScalarFieldEnum[]
+}
+
+/**
+ * personas.usuarios
+ */
+export type personas$usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the usuarios
+   */
+  select?: Prisma.usuariosSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the usuarios
+   */
+  omit?: Prisma.usuariosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.usuariosInclude<ExtArgs> | null
+  where?: Prisma.usuariosWhereInput
 }
 
 /**

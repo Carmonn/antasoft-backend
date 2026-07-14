@@ -77,6 +77,43 @@ CREATE TABLE "personas_municipios" (
     CONSTRAINT "personas_municipios_persona_id_fkey" FOREIGN KEY ("persona_id") REFERENCES "personas" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "usuarios" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "persona_id" INTEGER NOT NULL,
+    "rol_id" INTEGER NOT NULL,
+    "correo" TEXT NOT NULL,
+    "contrasena" TEXT NOT NULL,
+    "fecha_acceso" DATETIME,
+    "refresh_token" TEXT,
+    CONSTRAINT "usuarios_rol_id_fkey" FOREIGN KEY ("rol_id") REFERENCES "roles" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "usuarios_persona_id_fkey" FOREIGN KEY ("persona_id") REFERENCES "personas" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "usuarios_permisos" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "usuario_id" INTEGER NOT NULL,
+    "permiso_id" INTEGER NOT NULL,
+    CONSTRAINT "usuarios_permisos_usuario_id_fkey" FOREIGN KEY ("usuario_id") REFERENCES "usuarios" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "roles" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "nombre" TEXT NOT NULL,
+    "asignable" BOOLEAN NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "roles_permisos" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "permiso_id" INTEGER NOT NULL,
+    "rol_id" INTEGER NOT NULL,
+    CONSTRAINT "roles_permisos_rol_id_fkey" FOREIGN KEY ("rol_id") REFERENCES "roles" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "roles_permisos_permiso_id_fkey" FOREIGN KEY ("permiso_id") REFERENCES "permisos" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "estados_clave_key" ON "estados"("clave");
 
@@ -118,3 +155,27 @@ CREATE INDEX "personas_municipios_municipio_id_idx" ON "personas_municipios"("mu
 
 -- CreateIndex
 CREATE UNIQUE INDEX "personas_municipios_persona_id_municipio_id_key" ON "personas_municipios"("persona_id", "municipio_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "usuarios_persona_id_key" ON "usuarios"("persona_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "usuarios_correo_key" ON "usuarios"("correo");
+
+-- CreateIndex
+CREATE INDEX "usuarios_rol_id_idx" ON "usuarios"("rol_id");
+
+-- CreateIndex
+CREATE INDEX "usuarios_permisos_permiso_id_idx" ON "usuarios_permisos"("permiso_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "usuarios_permisos_usuario_id_permiso_id_key" ON "usuarios_permisos"("usuario_id", "permiso_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "roles_nombre_key" ON "roles"("nombre");
+
+-- CreateIndex
+CREATE INDEX "roles_permisos_rol_id_idx" ON "roles_permisos"("rol_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "roles_permisos_permiso_id_rol_id_key" ON "roles_permisos"("permiso_id", "rol_id");

@@ -67,3 +67,23 @@ export type contactos = Prisma.contactosModel
  * 
  */
 export type personas_municipios = Prisma.personas_municipiosModel
+/**
+ * Model usuarios
+ * 
+ */
+export type usuarios = Prisma.usuariosModel
+/**
+ * Model usuarios_permisos
+ * 
+ */
+export type usuarios_permisos = Prisma.usuarios_permisosModel
+/**
+ * Model roles
+ * 
+ */
+export type roles = Prisma.rolesModel
+/**
+ * Model roles_permisos
+ * 
+ */
+export type roles_permisos = Prisma.roles_permisosModel

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/generated/client.ts";
+import { Prisma, PrismaClient } from "@/generated/client.ts";
 import { z } from "@hono/zod-openapi";
 
 import { PermisoBasicRawSchema } from "../schemas/repository.ts";
@@ -10,7 +10,7 @@ export type PermidoBasicRaw = z.infer<typeof PermisoBasicRawSchema>;
 // export const permisoDetailInclude = {} as const;
 
 // ----- Consultas -----
-/** Busca un estado básico por su ID. */
+/** Busca un permiso básico por su ID. */
 export const findPermisoBasicRawById = async (
   prisma: PrismaClient,
   id: number,
@@ -20,9 +20,10 @@ export const findPermisoBasicRawById = async (
   });
 };
 
-/** Lista los estados básicos, opcionalmente filtrando por IDs de alcance. */
+/** Lista los permisos básicos, opcionalmente filtrando con un where */
 export const listPermisosBasicRaw = async (
   prisma: PrismaClient,
+  options?: Prisma.permisosFindManyArgs,
 ): Promise<PermidoBasicRaw[]> => {
-  return await prisma.permisos.findMany();
+  return await prisma.permisos.findMany(options);
 };

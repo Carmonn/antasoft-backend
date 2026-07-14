@@ -38,12 +38,16 @@ model permisos {
   descripcion   String
   identificador String  @unique
   asignable     Boolean
+
+  // Relaciones -----
+  rolesPermisos roles_permisos[]
 }
 
 model medios {
   id     Int    @id @default(autoincrement())
   nombre String @unique
 
+  // Relaciones -----
   contactos contactos[]
 }
 
@@ -71,9 +75,12 @@ model personas {
   apellido_materno String?
   fecha_nacimiento DateTime?
 
+  // Relaciones -----
   contactos contactos[]
   cobertura personas_municipios[]
+  usuarios  usuarios?
 
+  // Restricciones -----
   @@unique([alias, nombre, apellido_paterno, apellido_materno])
 }
 
@@ -95,9 +102,68 @@ model personas_municipios {
   persona_id   Int
   municipio_id Int
 
-  municipio municipios @relation(fields: [municipio_id], references: [id])
+  // Relaciones -----
+  municipio municipios @relation(fields: [municipio_id], references: [id], onDelete: Restrict)
   persona   personas   @relation(fields: [persona_id], references: [id], onDelete: Cascade)
 
+  // Restricciones -----
   @@unique([persona_id, municipio_id])
   @@index([municipio_id])
+}
+
+//---------- Usuarios ----------
+model usuarios {
+  id            Int       @id @default(autoincrement())
+  persona_id    Int       @unique
+  rol_id        Int
+  correo        String    @unique
+  contrasena    String
+  fecha_acceso  DateTime?
+  refresh_token String?
+
+  // Relaciones -----
+  rol     roles    @relation(fields: [rol_id], references: [id], onDelete: Restrict)
+  persona personas @relation(fields: [persona_id], references: [id], onDelete: Restrict)
+
+  permisos usuarios_permisos[]
+
+  // Restricciones -----
+  @@index([rol_id])
+}
+
+model usuarios_permisos {
+  id         Int @id @default(autoincrement())
+  usuario_id Int
+  permiso_id Int
+
+  // Relaciones -----
+  usuario usuarios @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+
+  // Restricciones -----
+  @@unique([usuario_id, permiso_id])
+  @@index([permiso_id])
+}
+
+model roles {
+  id        Int     @id @default(autoincrement())
+  nombre    String  @unique
+  asignable Boolean
+
+  // Relaciones -----
+  permisos roles_permisos[]
+  usuarios usuarios[]
+}
+
+model roles_permisos {
+  id         Int @id @default(autoincrement())
+  permiso_id Int
+  rol_id     Int
+
+  // Relaciones -----
+  rol     roles    @relation(fields: [rol_id], references: [id], onDelete: Cascade)
+  permiso permisos @relation(fields: [permiso_id], references: [id], onDelete: Cascade)
+
+  // Restricciones -----
+  @@unique([permiso_id, rol_id])
+  @@index([rol_id])
 }

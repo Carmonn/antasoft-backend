@@ -216,6 +216,7 @@ export type permisosWhereInput = {
   descripcion?: Prisma.StringFilter<"permisos"> | string
   identificador?: Prisma.StringFilter<"permisos"> | string
   asignable?: Prisma.BoolFilter<"permisos"> | boolean
+  rolesPermisos?: Prisma.Roles_permisosListRelationFilter
 }
 
 export type permisosOrderByWithRelationInput = {
@@ -224,6 +225,7 @@ export type permisosOrderByWithRelationInput = {
   descripcion?: Prisma.SortOrder
   identificador?: Prisma.SortOrder
   asignable?: Prisma.SortOrder
+  rolesPermisos?: Prisma.roles_permisosOrderByRelationAggregateInput
 }
 
 export type permisosWhereUniqueInput = Prisma.AtLeast<{
@@ -235,6 +237,7 @@ export type permisosWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.permisosWhereInput | Prisma.permisosWhereInput[]
   descripcion?: Prisma.StringFilter<"permisos"> | string
   asignable?: Prisma.BoolFilter<"permisos"> | boolean
+  rolesPermisos?: Prisma.Roles_permisosListRelationFilter
 }, "id" | "nombre" | "identificador">
 
 export type permisosOrderByWithAggregationInput = {
@@ -266,6 +269,7 @@ export type permisosCreateInput = {
   descripcion: string
   identificador: string
   asignable: boolean
+  rolesPermisos?: Prisma.roles_permisosCreateNestedManyWithoutPermisoInput
 }
 
 export type permisosUncheckedCreateInput = {
@@ -274,6 +278,7 @@ export type permisosUncheckedCreateInput = {
   descripcion: string
   identificador: string
   asignable: boolean
+  rolesPermisos?: Prisma.roles_permisosUncheckedCreateNestedManyWithoutPermisoInput
 }
 
 export type permisosUpdateInput = {
@@ -281,6 +286,7 @@ export type permisosUpdateInput = {
   descripcion?: Prisma.StringFieldUpdateOperationsInput | string
   identificador?: Prisma.StringFieldUpdateOperationsInput | string
   asignable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rolesPermisos?: Prisma.roles_permisosUpdateManyWithoutPermisoNestedInput
 }
 
 export type permisosUncheckedUpdateInput = {
@@ -289,6 +295,7 @@ export type permisosUncheckedUpdateInput = {
   descripcion?: Prisma.StringFieldUpdateOperationsInput | string
   identificador?: Prisma.StringFieldUpdateOperationsInput | string
   asignable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rolesPermisos?: Prisma.roles_permisosUncheckedUpdateManyWithoutPermisoNestedInput
 }
 
 export type permisosCreateManyInput = {
@@ -346,10 +353,104 @@ export type permisosSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
+export type PermisosScalarRelationFilter = {
+  is?: Prisma.permisosWhereInput
+  isNot?: Prisma.permisosWhereInput
+}
+
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
+export type permisosCreateNestedOneWithoutRolesPermisosInput = {
+  create?: Prisma.XOR<Prisma.permisosCreateWithoutRolesPermisosInput, Prisma.permisosUncheckedCreateWithoutRolesPermisosInput>
+  connectOrCreate?: Prisma.permisosCreateOrConnectWithoutRolesPermisosInput
+  connect?: Prisma.permisosWhereUniqueInput
+}
+
+export type permisosUpdateOneRequiredWithoutRolesPermisosNestedInput = {
+  create?: Prisma.XOR<Prisma.permisosCreateWithoutRolesPermisosInput, Prisma.permisosUncheckedCreateWithoutRolesPermisosInput>
+  connectOrCreate?: Prisma.permisosCreateOrConnectWithoutRolesPermisosInput
+  upsert?: Prisma.permisosUpsertWithoutRolesPermisosInput
+  connect?: Prisma.permisosWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.permisosUpdateToOneWithWhereWithoutRolesPermisosInput, Prisma.permisosUpdateWithoutRolesPermisosInput>, Prisma.permisosUncheckedUpdateWithoutRolesPermisosInput>
+}
+
+export type permisosCreateWithoutRolesPermisosInput = {
+  nombre: string
+  descripcion: string
+  identificador: string
+  asignable: boolean
+}
+
+export type permisosUncheckedCreateWithoutRolesPermisosInput = {
+  id?: number
+  nombre: string
+  descripcion: string
+  identificador: string
+  asignable: boolean
+}
+
+export type permisosCreateOrConnectWithoutRolesPermisosInput = {
+  where: Prisma.permisosWhereUniqueInput
+  create: Prisma.XOR<Prisma.permisosCreateWithoutRolesPermisosInput, Prisma.permisosUncheckedCreateWithoutRolesPermisosInput>
+}
+
+export type permisosUpsertWithoutRolesPermisosInput = {
+  update: Prisma.XOR<Prisma.permisosUpdateWithoutRolesPermisosInput, Prisma.permisosUncheckedUpdateWithoutRolesPermisosInput>
+  create: Prisma.XOR<Prisma.permisosCreateWithoutRolesPermisosInput, Prisma.permisosUncheckedCreateWithoutRolesPermisosInput>
+  where?: Prisma.permisosWhereInput
+}
+
+export type permisosUpdateToOneWithWhereWithoutRolesPermisosInput = {
+  where?: Prisma.permisosWhereInput
+  data: Prisma.XOR<Prisma.permisosUpdateWithoutRolesPermisosInput, Prisma.permisosUncheckedUpdateWithoutRolesPermisosInput>
+}
+
+export type permisosUpdateWithoutRolesPermisosInput = {
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.StringFieldUpdateOperationsInput | string
+  identificador?: Prisma.StringFieldUpdateOperationsInput | string
+  asignable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+}
+
+export type permisosUncheckedUpdateWithoutRolesPermisosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.StringFieldUpdateOperationsInput | string
+  identificador?: Prisma.StringFieldUpdateOperationsInput | string
+  asignable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+}
+
+
+/**
+ * Count Type PermisosCountOutputType
+ */
+
+export type PermisosCountOutputType = {
+  rolesPermisos: number
+}
+
+export type PermisosCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  rolesPermisos?: boolean | PermisosCountOutputTypeCountRolesPermisosArgs
+}
+
+/**
+ * PermisosCountOutputType without action
+ */
+export type PermisosCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PermisosCountOutputType
+   */
+  select?: Prisma.PermisosCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PermisosCountOutputType without action
+ */
+export type PermisosCountOutputTypeCountRolesPermisosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.roles_permisosWhereInput
+}
 
 
 export type permisosSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -358,6 +459,8 @@ export type permisosSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   descripcion?: boolean
   identificador?: boolean
   asignable?: boolean
+  rolesPermisos?: boolean | Prisma.permisos$rolesPermisosArgs<ExtArgs>
+  _count?: boolean | Prisma.PermisosCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["permisos"]>
 
 export type permisosSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -385,10 +488,18 @@ export type permisosSelectScalar = {
 }
 
 export type permisosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "descripcion" | "identificador" | "asignable", ExtArgs["result"]["permisos"]>
+export type permisosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  rolesPermisos?: boolean | Prisma.permisos$rolesPermisosArgs<ExtArgs>
+  _count?: boolean | Prisma.PermisosCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type permisosIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type permisosIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $permisosPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "permisos"
-  objects: {}
+  objects: {
+    rolesPermisos: Prisma.$roles_permisosPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     nombre: string
@@ -789,6 +900,7 @@ readonly fields: permisosFieldRefs;
  */
 export interface Prisma__permisosClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  rolesPermisos<T extends Prisma.permisos$rolesPermisosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.permisos$rolesPermisosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$roles_permisosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -840,6 +952,10 @@ export type permisosFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.permisosOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.permisosInclude<ExtArgs> | null
+  /**
    * Filter, which permisos to fetch.
    */
   where: Prisma.permisosWhereUniqueInput
@@ -858,6 +974,10 @@ export type permisosFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.permisosOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.permisosInclude<ExtArgs> | null
+  /**
    * Filter, which permisos to fetch.
    */
   where: Prisma.permisosWhereUniqueInput
@@ -875,6 +995,10 @@ export type permisosFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the permisos
    */
   omit?: Prisma.permisosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.permisosInclude<ExtArgs> | null
   /**
    * Filter, which permisos to fetch.
    */
@@ -924,6 +1048,10 @@ export type permisosFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.permisosOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.permisosInclude<ExtArgs> | null
+  /**
    * Filter, which permisos to fetch.
    */
   where?: Prisma.permisosWhereInput
@@ -971,6 +1099,10 @@ export type permisosFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the permisos
    */
   omit?: Prisma.permisosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.permisosInclude<ExtArgs> | null
   /**
    * Filter, which permisos to fetch.
    */
@@ -1020,6 +1152,10 @@ export type permisosCreateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.permisosOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.permisosInclude<ExtArgs> | null
+  /**
    * The data needed to create a permisos.
    */
   data: Prisma.XOR<Prisma.permisosCreateInput, Prisma.permisosUncheckedCreateInput>
@@ -1065,6 +1201,10 @@ export type permisosUpdateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the permisos
    */
   omit?: Prisma.permisosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.permisosInclude<ExtArgs> | null
   /**
    * The data needed to update a permisos.
    */
@@ -1132,6 +1272,10 @@ export type permisosUpsertArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.permisosOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.permisosInclude<ExtArgs> | null
+  /**
    * The filter to search for the permisos to update in case it exists.
    */
   where: Prisma.permisosWhereUniqueInput
@@ -1158,6 +1302,10 @@ export type permisosDeleteArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.permisosOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.permisosInclude<ExtArgs> | null
+  /**
    * Filter which permisos to delete.
    */
   where: Prisma.permisosWhereUniqueInput
@@ -1178,6 +1326,30 @@ export type permisosDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * permisos.rolesPermisos
+ */
+export type permisos$rolesPermisosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the roles_permisos
+   */
+  select?: Prisma.roles_permisosSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the roles_permisos
+   */
+  omit?: Prisma.roles_permisosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.roles_permisosInclude<ExtArgs> | null
+  where?: Prisma.roles_permisosWhereInput
+  orderBy?: Prisma.roles_permisosOrderByWithRelationInput | Prisma.roles_permisosOrderByWithRelationInput[]
+  cursor?: Prisma.roles_permisosWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Roles_permisosScalarFieldEnum | Prisma.Roles_permisosScalarFieldEnum[]
+}
+
+/**
  * permisos without action
  */
 export type permisosDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1189,4 +1361,8 @@ export type permisosDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the permisos
    */
   omit?: Prisma.permisosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.permisosInclude<ExtArgs> | null
 }
