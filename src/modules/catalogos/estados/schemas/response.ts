@@ -6,9 +6,7 @@ export const EstadoBasicSchema = EstadoBasicRawSchema.openapi({
   description: "Informacion basica de un estado.",
 });
 
-export const EstadoDetailSchema = EstadoDetailRawSchema.omit({
-  municipios: true,
-}).extend({
+export const EstadoDetailSchema = EstadoDetailRawSchema.extend({
   municipios: z.array(MunicipioBasicRawSchema.omit({ estado_id: true })),
 });
 
