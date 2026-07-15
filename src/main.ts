@@ -18,6 +18,7 @@ import estatusHonorariosRoutes from "@/modules/catalogos/estatusHonorarios/route
 import personasRoutes from "@/modules/personas/routes/router.ts";
 
 import rolesRoutes from "@/modules/usuarios/roles/routes/router.ts";
+import usuariosRoutes from "@/modules/usuarios/usuarios/routes/router.ts";
 
 // ----- Type Definition on the app -----
 export type AppEnv = { Variables: { prisma: PrismaClient } };
@@ -74,6 +75,7 @@ app.route("/catalogos/estatus-honorarios", estatusHonorariosRoutes);
 app.route("/personas", personasRoutes);
 
 app.route("/usuarios/roles", rolesRoutes);
+app.route("/usuarios/usuarios", usuariosRoutes);
 
 Deno.serve(app.fetch);
 console.log("📄 Docs: http://localhost:8000/docs");

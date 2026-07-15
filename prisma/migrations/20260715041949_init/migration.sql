@@ -95,7 +95,8 @@ CREATE TABLE "usuarios_permisos" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "usuario_id" INTEGER NOT NULL,
     "permiso_id" INTEGER NOT NULL,
-    CONSTRAINT "usuarios_permisos_usuario_id_fkey" FOREIGN KEY ("usuario_id") REFERENCES "usuarios" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT "usuarios_permisos_usuario_id_fkey" FOREIGN KEY ("usuario_id") REFERENCES "usuarios" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "usuarios_permisos_permiso_id_fkey" FOREIGN KEY ("permiso_id") REFERENCES "permisos" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable

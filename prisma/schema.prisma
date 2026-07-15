@@ -40,7 +40,8 @@ model permisos {
   asignable     Boolean
 
   // Relaciones -----
-  rolesPermisos roles_permisos[]
+  rolesPermisos    roles_permisos[]
+  usuariosPermisos usuarios_permisos[]
 }
 
 model medios {
@@ -138,6 +139,7 @@ model usuarios_permisos {
 
   // Relaciones -----
   usuario usuarios @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  permiso permisos @relation(fields: [permiso_id], references: [id], onDelete: Cascade)
 
   // Restricciones -----
   @@unique([usuario_id, permiso_id])
