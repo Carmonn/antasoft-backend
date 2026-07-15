@@ -32,6 +32,16 @@ export const personaDetailInclude = {
 } as const;
 
 // ----- Consultas -----
+/** Busca una persona básica, se le tiene que pasar los parametros de consulta */
+export const findPersonaBasicRaw = async (
+  prisma: PrismaClient,
+  options: Prisma.personasFindFirstArgs,
+): Promise<PersonaBasicRaw | null> => {
+  return await prisma.personas.findFirst({
+    ...options,
+    include: personaBasicInclude,
+  });
+};
 /** Busca una persona básica por su ID. */
 export const findPersonaBasicRawById = async (
   prisma: PrismaClient,
@@ -67,6 +77,16 @@ export const findPersonaBasicRawByIdentity = async (
   });
 };
 
+/** Busca una persona detallada, se le tiene que pasar los parametros de consulta */
+export const findPersonaDetailRaw = async (
+  prisma: PrismaClient,
+  options: Prisma.personasFindFirstArgs,
+): Promise<PersonaDetailRaw | null> => {
+  return await prisma.personas.findFirst({
+    ...options,
+    include: personaDetailInclude,
+  });
+};
 /** Busca una persona detallada por su ID. */
 export const findPersonaDetailRawById = async (
   prisma: PrismaClient,

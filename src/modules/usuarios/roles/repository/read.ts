@@ -12,6 +12,15 @@ export const rolDetailInclude = {
 } as const;
 
 // ----- Consultas -----
+/** Busca un rol básico, se le tiene que pasar los parametros de consulta */
+export const findRolBasicRaw = async (
+  prisma: PrismaClient,
+  options: Prisma.rolesFindFirstArgs,
+): Promise<RolBasicRaw | null> => {
+  return await prisma.roles.findFirst({
+    ...options,
+  });
+};
 /** Busca un rol básica por su ID. */
 export const findRolBasicRawById = async (
   prisma: PrismaClient,
@@ -39,6 +48,16 @@ export const findRolBasicRawByIdentity = async (
   });
 };
 
+/** Busca un rol detallado, se le tiene que pasar los parametros de consulta */
+export const findRolDetailRaw = async (
+  prisma: PrismaClient,
+  options: Prisma.rolesFindFirstArgs,
+): Promise<RolDetailRaw | null> => {
+  return await prisma.roles.findFirst({
+    ...options,
+    include: rolDetailInclude,
+  });
+};
 /** Busca un rol detallado por su ID. */
 export const findRolDetailRawById = async (
   prisma: PrismaClient,

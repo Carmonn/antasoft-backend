@@ -5,16 +5,18 @@ import type {
   UsuarioDetailRaw,
 } from "../schemas/repository.ts";
 
-import {
-  personaBasicInclude,
-  personaDetailInclude,
-} from "@/modules/personas/repository/read.ts";
+import { personaDetailInclude } from "@/modules/personas/repository/read.ts";
 import { rolDetailInclude } from "@/modules/usuarios/roles/repository/read.ts";
 
 // ----- Parametros consulta -----
 export const usuarioBasicInclude = {
-  persona: {
-    include: personaBasicInclude,
+  rol: {
+    include: rolDetailInclude,
+  },
+  permisos: {
+    include: {
+      permiso: true,
+    },
   },
 } as const;
 
@@ -33,6 +35,16 @@ export const usuarioDetailInclude = {
 } as const;
 
 // ----- Consultas -----
+/** Busca un usuario básico, se le tiene que pasar los parametros de consulta */
+export const findUsuarioBasicRaw = async (
+  prisma: PrismaClient,
+  options: Prisma.usuariosFindFirstArgs,
+): Promise<UsuarioBasicRaw | null> => {
+  return await prisma.usuarios.findFirst({
+    ...options,
+    include: usuarioBasicInclude,
+  });
+};
 /** Busca un usuario básico por su ID. */
 export const findUsuarioBasicRawById = async (
   prisma: PrismaClient,
@@ -51,7 +63,7 @@ export const findUsuarioBasicRawByIdentity = async (
   identity: {
     correo: string | undefined;
   },
-  options?: Prisma.usuariosFindUniqueArgs,
+  options?: Prisma.usuariosFindFirstArgs,
 ): Promise<UsuarioBasicRaw | null> => {
   return await prisma.usuarios.findFirst({
     where: {
@@ -62,6 +74,16 @@ export const findUsuarioBasicRawByIdentity = async (
   });
 };
 
+/** Busca un usuario detallado, se le tiene que pasar los parametros de consulta */
+export const findUsuarioDetailRaw = async (
+  prisma: PrismaClient,
+  options: Prisma.usuariosFindFirstArgs,
+): Promise<UsuarioDetailRaw | null> => {
+  return await prisma.usuarios.findFirst({
+    ...options,
+    include: usuarioDetailInclude,
+  });
+};
 /** Busca un usuario detallado por su ID. */
 export const findUsuarioDetailRawById = async (
   prisma: PrismaClient,
@@ -80,7 +102,7 @@ export const findUsuarioDetailRawByIdentity = async (
   identity: {
     correo: string | undefined;
   },
-  options?: Prisma.usuariosFindUniqueArgs,
+  options?: Prisma.usuariosFindFirstArgs,
 ): Promise<UsuarioDetailRaw | null> => {
   return await prisma.usuarios.findFirst({
     where: {
