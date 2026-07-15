@@ -14,9 +14,11 @@ export type PermidoBasicRaw = z.infer<typeof PermisoBasicRawSchema>;
 export const findPermisoBasicRawById = async (
   prisma: PrismaClient,
   id: number,
+  options?: Prisma.permisosFindUniqueArgs,
 ): Promise<PermidoBasicRaw | null> => {
   return await prisma.permisos.findUnique({
     where: { id },
+    ...options,
   });
 };
 

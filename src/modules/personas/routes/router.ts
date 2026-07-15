@@ -12,8 +12,8 @@ import {
   listPersonasHandler,
   getPersonaByIdHandler,
   createPersonasHandler,
-  deletePersonasHandler,
   updatePersonasHandler,
+  deletePersonasHandler,
 } from "../handlers/index.ts";
 
 const personasRoutes = new OpenAPIHono<AppEnv>();

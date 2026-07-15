@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/generated/client.ts";
+import { Prisma, PrismaClient } from "@/generated/client.ts";
 import { z } from "@hono/zod-openapi";
 
 import { MedioBasicRawSchema } from "../schemas/repository.ts";
@@ -14,15 +14,18 @@ export type MedioBasicRaw = z.infer<typeof MedioBasicRawSchema>;
 export const findMedioBasicRawById = async (
   prisma: PrismaClient,
   id: number,
+  options?: Prisma.mediosFindUniqueArgs,
 ): Promise<MedioBasicRaw | null> => {
   return await prisma.medios.findUnique({
     where: { id },
+    ...options,
   });
 };
 
 /** Lista los medios básicos */
 export const listMediosBasicRaw = async (
   prisma: PrismaClient,
+  options?: Prisma.mediosFindManyArgs,
 ): Promise<MedioBasicRaw[]> => {
-  return await prisma.medios.findMany();
+  return await prisma.medios.findMany(options);
 };

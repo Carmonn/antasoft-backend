@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/generated/client.ts";
+import { Prisma, PrismaClient } from "@/generated/client.ts";
 
 import type {
   PersonaBasicRaw,
@@ -36,9 +36,11 @@ export const personaDetailInclude = {
 export const findPersonaBasicRawById = async (
   prisma: PrismaClient,
   id: number,
+  options?: Prisma.personasFindUniqueArgs,
 ): Promise<PersonaBasicRaw | null> => {
   return await prisma.personas.findUnique({
     where: { id },
+    ...options,
     include: personaBasicInclude,
   });
 };
@@ -51,6 +53,7 @@ export const findPersonaBasicRawByIdentity = async (
     apellido_paterno: string | undefined | null;
     apellido_materno: string | undefined | null;
   },
+  options?: Prisma.personasFindFirstArgs,
 ): Promise<PersonaBasicRaw | null> => {
   return await prisma.personas.findFirst({
     where: {
@@ -59,6 +62,7 @@ export const findPersonaBasicRawByIdentity = async (
       apellido_paterno: identity.apellido_paterno,
       apellido_materno: identity.apellido_materno,
     },
+    ...options,
     include: personaBasicInclude,
   });
 };
@@ -67,9 +71,11 @@ export const findPersonaBasicRawByIdentity = async (
 export const findPersonaDetailRawById = async (
   prisma: PrismaClient,
   id: number,
+  options?: Prisma.personasFindUniqueArgs,
 ): Promise<PersonaDetailRaw | null> => {
   return await prisma.personas.findUnique({
     where: { id },
+    ...options,
     include: personaDetailInclude,
   });
 };
@@ -82,6 +88,7 @@ export const findPersonaDetailRawByIdentity = async (
     apellido_paterno: string | undefined | null;
     apellido_materno: string | undefined | null;
   },
+  options?: Prisma.personasFindFirstArgs,
 ): Promise<PersonaDetailRaw | null> => {
   return await prisma.personas.findFirst({
     where: {
@@ -90,6 +97,7 @@ export const findPersonaDetailRawByIdentity = async (
       apellido_paterno: identity.apellido_paterno,
       apellido_materno: identity.apellido_materno,
     },
+    ...options,
     include: personaDetailInclude,
   });
 };
@@ -97,14 +105,20 @@ export const findPersonaDetailRawByIdentity = async (
 /** Lista las personas básicas */
 export const listPersonasBasicRaw = async (
   prisma: PrismaClient,
+  options?: Prisma.personasFindManyArgs,
 ): Promise<PersonaBasicRaw[]> => {
-  return await prisma.personas.findMany({ include: personaBasicInclude });
+  return await prisma.personas.findMany({
+    ...options,
+    include: personaBasicInclude,
+  });
 };
 /** Lista las personas detalladas */
 export const listPersonasDetailRaw = async (
   prisma: PrismaClient,
+  options?: Prisma.personasFindManyArgs,
 ): Promise<PersonaDetailRaw[]> => {
   return await prisma.personas.findMany({
+    ...options,
     include: personaDetailInclude,
   });
 };

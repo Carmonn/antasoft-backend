@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/generated/client.ts";
+import { Prisma, PrismaClient } from "@/generated/client.ts";
 import { z } from "@hono/zod-openapi";
 
 import { EstatusHonorarioBasicRawSchema } from "../schemas/repository.ts";
@@ -16,15 +16,18 @@ export type EstatusHonorarioBasicRaw = z.infer<
 export const findEstatusHonorarioBasicRawById = async (
   prisma: PrismaClient,
   id: number,
+  options?: Prisma.estatus_honorariosFindUniqueArgs,
 ): Promise<EstatusHonorarioBasicRaw | null> => {
   return await prisma.estatus_honorarios.findUnique({
     where: { id },
+    ...options,
   });
 };
 
 /** Lista los estatus de honorario básicos */
 export const listEstatusHonorariosBasicRaw = async (
   prisma: PrismaClient,
+  options?: Prisma.estatus_honorariosFindManyArgs,
 ): Promise<EstatusHonorarioBasicRaw[]> => {
-  return await prisma.estatus_honorarios.findMany();
+  return await prisma.estatus_honorarios.findMany(options);
 };

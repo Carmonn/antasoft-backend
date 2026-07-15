@@ -12,7 +12,7 @@ export const getPermisoByIdService = async (
 ) => {
   const permisoRaw = await findPermisoBasicRawById(prisma, id);
 
-  if (!permisoRaw) {
+  if (!permisoRaw || permisoRaw.asignable === false) {
     throw permisosErrors.notFound;
   }
 

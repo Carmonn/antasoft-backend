@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/generated/client.ts";
+import { Prisma, PrismaClient } from "@/generated/client.ts";
 import { z } from "@hono/zod-openapi";
 
 import {
@@ -20,9 +20,11 @@ export const estadoDetailInclude = {
 export const findEstadoBasicRawById = async (
   prisma: PrismaClient,
   id: number,
+  options?: Prisma.estadosFindUniqueArgs,
 ): Promise<EstadoBasicRaw | null> => {
   return await prisma.estados.findUnique({
     where: { id },
+    ...options,
   });
 };
 
@@ -30,9 +32,11 @@ export const findEstadoBasicRawById = async (
 export const findEstadoDetailRawById = async (
   prisma: PrismaClient,
   id: number,
+  options?: Prisma.estadosFindUniqueArgs,
 ): Promise<EstadoDetailRaw | null> => {
   return await prisma.estados.findUnique({
     where: { id },
+    ...options,
     include: estadoDetailInclude,
   });
 };
@@ -40,15 +44,18 @@ export const findEstadoDetailRawById = async (
 /** Lista los estados básicos */
 export const listEstadosBasicRaw = async (
   prisma: PrismaClient,
+  options?: Prisma.estadosFindManyArgs,
 ): Promise<EstadoBasicRaw[]> => {
-  return await prisma.estados.findMany();
+  return await prisma.estados.findMany(options);
 };
 
 /** Lista los estados detallados */
 export const listEstadosDetailRaw = async (
   prisma: PrismaClient,
+  options?: Prisma.estadosFindManyArgs,
 ): Promise<EstadoDetailRaw[]> => {
   return await prisma.estados.findMany({
+    ...options,
     include: estadoDetailInclude,
   });
 };
