@@ -9,7 +9,7 @@ import { rolesErrors } from "../errors.ts";
 export const getRolByIdService = async (prisma: PrismaClient, id: number) => {
   const rolRaw = await findRolDetailRawById(prisma, id);
 
-  if (!rolRaw) {
+  if (!rolRaw || rolRaw.asignable === false) {
     throw rolesErrors.notFound;
   }
 

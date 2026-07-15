@@ -29,7 +29,7 @@ export const findRolBasicRawByIdentity = async (
   identity: {
     nombre: string | undefined;
   },
-  options?: Prisma.rolesFindUniqueArgs,
+  options?: Prisma.rolesFindFirstArgs,
 ): Promise<RolBasicRaw | null> => {
   return await prisma.roles.findFirst({
     where: {
@@ -57,7 +57,7 @@ export const findRolDetailRawByIdentity = async (
   identity: {
     nombre: string | undefined;
   },
-  options?: Prisma.rolesFindUniqueArgs,
+  options?: Prisma.rolesFindFirstArgs,
 ): Promise<RolDetailRaw | null> => {
   return await prisma.roles.findFirst({
     where: {

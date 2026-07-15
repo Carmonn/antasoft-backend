@@ -11,8 +11,10 @@ import {
 } from "../repository/read.ts";
 import { updateRolAggregate } from "../repository/write.ts";
 import { toRolDetail } from "../repository/mapper.ts";
-
 import { rolesErrors } from "../errors.ts";
+
+import { listPermisosBasicRaw } from "@/modules/catalogos/permisos/repository/read.ts";
+import { permisosErrors } from "@/modules/catalogos/permisos/errors.ts";
 
 /** Actualiza un rol aplicando reglas de negocio */
 export const updateRolService = async (
@@ -20,17 +22,28 @@ export const updateRolService = async (
   id: number,
   input: z.infer<typeof UpdateRolSchema>,
 ): Promise<RolDetail> => {
-  const personaRaw = await findRolBasicRawById(prisma, id);
-  if (!personaRaw) {
+  const rolRaw = await findRolBasicRawById(prisma, id);
+  if (!rolRaw) {
     throw rolesErrors.notFound;
   }
 
-  const personaRawDuplicate = await findRolBasicRawByIdentity(prisma, {
+  const rolRawDuplicate = await findRolBasicRawByIdentity(prisma, {
     nombre: input.nombre,
   });
-  if (personaRawDuplicate && personaRawDuplicate.id !== id) {
+  if (rolRawDuplicate && rolRawDuplicate.id !== id) {
     throw rolesErrors.alreadyExists;
   }
+
+  const permisosNoAsignables = await listPermisosBasicRaw(prisma, {
+    where: { asignable: true },
+  });
+  const isPermisosNoAsignables = permisosNoAsignables.some((permiso) => {
+    return input.permisos?.includes(permiso.id);
+  });
+  if (isPermisosNoAsignables) {
+    throw permisosErrors.notFound;
+  }
+
   const { id: rol_id } = await updateRolAggregate(prisma, id, input);
   const rolUpdatedRaw = await findRolDetailRawById(prisma, rol_id);
 

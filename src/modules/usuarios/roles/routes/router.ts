@@ -12,8 +12,8 @@ import {
   listRolesHandler,
   getRolByIdHandler,
   createRolesHandler,
-  deleteRolesHandler,
   updateRolesHandler,
+  deleteRolesHandler,
 } from "../handlers/index.ts";
 
 const rolesRoutes = new OpenAPIHono<AppEnv>();
@@ -28,9 +28,9 @@ rolesRoutes.openapi(getRolesByIdRoute, getRolByIdHandler);
 rolesRoutes.openapi(createRolesRoute, createRolesHandler);
 
 //---------- UPDATE updateRol ----------
-rolesRoutes.openapi(updateRolesRoute, deleteRolesHandler);
+rolesRoutes.openapi(updateRolesRoute, updateRolesHandler);
 
 //---------- DELETE deleteRol ----------
-rolesRoutes.openapi(deleteRolesRoute, updateRolesHandler);
+rolesRoutes.openapi(deleteRolesRoute, deleteRolesHandler);
 
 export default rolesRoutes;
