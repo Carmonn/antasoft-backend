@@ -29,6 +29,9 @@ export const createUsuariosRoute = createRoute({
       },
       description: "Crea un nuevo usuario",
     },
-    ...toErrorSchema(usuariosErrors.alreadyExists),
+    ...toErrorSchema(
+      usuariosErrors.alreadyExists,
+      usuariosErrors.notFoundRoles,
+    ),
   },
 });

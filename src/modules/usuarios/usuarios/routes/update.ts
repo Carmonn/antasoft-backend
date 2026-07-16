@@ -10,7 +10,7 @@ import { usuariosErrors } from "../errors.ts";
 export const updateUsuariosRoute = createRoute({
   method: "patch",
   path: "/:id",
-  tags: ["Personas"],
+  tags: ["Usuarios: Usuarios"],
   request: {
     params: IdParamsSchema,
     body: {
@@ -31,6 +31,10 @@ export const updateUsuariosRoute = createRoute({
       },
       description: "Edita un usuario",
     },
-    ...toErrorSchema(usuariosErrors.notFound, usuariosErrors.alreadyExists),
+    ...toErrorSchema(
+      usuariosErrors.notFound,
+      usuariosErrors.alreadyExists,
+      usuariosErrors.notFoundRoles,
+    ),
   },
 });

@@ -20,7 +20,7 @@ export const deleteUsuarioRoute = createRoute({
           schema: success(UsuarioBasicSchema),
         },
       },
-      description: "Elimina una persona",
+      description: "Elimina un usuario",
     },
     ...toErrorSchema(usuariosErrors.notFound),
   },

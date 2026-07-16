@@ -12,8 +12,8 @@ import {
   listUsuariosHandler,
   getUsuarioByIdHandler,
   createUsuariosHandler,
-  deleteUsuariosHandler,
   updateUsuariosHandler,
+  deleteUsuariosHandler,
 } from "../handlers/index.ts";
 
 const usuariosRoutes = new OpenAPIHono<AppEnv>();
@@ -28,9 +28,9 @@ usuariosRoutes.openapi(getUsuariosByIdRoute, getUsuarioByIdHandler);
 usuariosRoutes.openapi(createUsuariosRoute, createUsuariosHandler);
 
 //---------- UPDATE updateUsuario ----------
-usuariosRoutes.openapi(updateUsuariosRoute, deleteUsuariosHandler);
+usuariosRoutes.openapi(updateUsuariosRoute, updateUsuariosHandler);
 
 //---------- DELETE deleteUsuario ----------
-usuariosRoutes.openapi(deleteUsuarioRoute, updateUsuariosHandler);
+usuariosRoutes.openapi(deleteUsuarioRoute, deleteUsuariosHandler);
 
 export default usuariosRoutes;

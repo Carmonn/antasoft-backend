@@ -9,7 +9,7 @@ import { usuariosErrors } from "../errors.ts";
 export const getUsuariosByIdRoute = createRoute({
   method: "get",
   path: "/:id",
-  tags: ["Personas"],
+  tags: ["Usuarios: Usuarios"],
   request: {
     params: IdParamsSchema,
   },
