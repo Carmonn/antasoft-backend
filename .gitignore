@@ -33,6 +33,7 @@ src/generated/
 dist/
 build/
 coverage/
+prisma/migrations/
 
 # OS / editor files
 .DS_Store
