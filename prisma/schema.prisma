@@ -169,3 +169,24 @@ model roles_permisos {
   @@unique([permiso_id, rol_id])
   @@index([rol_id])
 }
+
+//---------- Sucursales ----------
+model clientes {
+  id     Int    @id @default(autoincrement())
+  nombre String @unique
+
+  // Relaciones -----
+  identificadores identificadores[]
+}
+
+model identificadores {
+  id         Int    @id @default(autoincrement())
+  cliente_id Int
+  nombre     String
+
+  // Relaciones -----
+  cliente clientes @relation(fields: [cliente_id], references: [id], onDelete: Cascade)
+
+  // Restricciones -----
+  @@unique([cliente_id, nombre])
+}
