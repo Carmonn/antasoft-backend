@@ -14,7 +14,6 @@ import { toRolDetail } from "../repository/mapper.ts";
 import { rolesErrors } from "../errors.ts";
 
 import { listPermisosBasicRaw } from "@/modules/catalogos/permisos/repository/read.ts";
-import { permisosErrors } from "@/modules/catalogos/permisos/errors.ts";
 
 /** Actualiza un rol aplicando reglas de negocio */
 export const updateRolService = async (
@@ -35,13 +34,13 @@ export const updateRolService = async (
   }
 
   const permisosNoAsignables = await listPermisosBasicRaw(prisma, {
-    where: { asignable: true },
+    where: { asignable: false },
   });
   const isPermisosNoAsignables = permisosNoAsignables.some((permiso) => {
     return input.permisos?.includes(permiso.id);
   });
   if (isPermisosNoAsignables) {
-    throw permisosErrors.notFound;
+    throw rolesErrors.notFoundPermiso;
   }
 
   const { id: rol_id } = await updateRolAggregate(prisma, id, input);

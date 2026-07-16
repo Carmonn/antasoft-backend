@@ -20,7 +20,7 @@ export const deleteRolesRoute = createRoute({
           schema: success(RolDetailSchema),
         },
       },
-      description: "Elimina una persona",
+      description: "Elimina un rol",
     },
     ...toErrorSchema(rolesErrors.notFound),
   },

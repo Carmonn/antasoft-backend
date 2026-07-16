@@ -20,7 +20,7 @@ export const getRolesByIdRoute = createRoute({
           schema: success(RolDetailSchema),
         },
       },
-      description: "Obtiene la información detallada de una persona específica",
+      description: "Obtiene la información detallada de un rol específico",
     },
     ...toErrorSchema(rolesErrors.notFound),
   },

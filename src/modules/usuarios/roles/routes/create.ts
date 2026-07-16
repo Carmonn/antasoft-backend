@@ -27,8 +27,8 @@ export const createRolesRoute = createRoute({
           schema: success(RolDetailSchema),
         },
       },
-      description: "Crea una nueva persona",
+      description: "Crea un nuevo rol",
     },
-    ...toErrorSchema(rolesErrors.alreadyExists),
+    ...toErrorSchema(rolesErrors.alreadyExists, rolesErrors.notFoundPermiso),
   },
 });

@@ -29,8 +29,12 @@ export const updateRolesRoute = createRoute({
           schema: success(RolDetailSchema),
         },
       },
-      description: "Edita una persona",
+      description: "Edita un rol",
     },
-    ...toErrorSchema(rolesErrors.notFound, rolesErrors.alreadyExists),
+    ...toErrorSchema(
+      rolesErrors.notFound,
+      rolesErrors.alreadyExists,
+      rolesErrors.notFoundPermiso,
+    ),
   },
 });
