@@ -27,6 +27,7 @@ model municipios {
   // Relaciones -----
   estado             estados               @relation(fields: [estado_id], references: [id], onDelete: Cascade)
   personasMunicipios personas_municipios[]
+  sucursales         sucursales[]
 
   // Restricciones -----
   @@unique([estado_id, clave])
@@ -177,6 +178,7 @@ model clientes {
 
   // Relaciones -----
   identificadores identificadores[]
+  sucursales      sucursales[]
 }
 
 model identificadores {
@@ -186,7 +188,40 @@ model identificadores {
 
   // Relaciones -----
   cliente clientes @relation(fields: [cliente_id], references: [id], onDelete: Cascade)
+  claves  claves[]
 
   // Restricciones -----
   @@unique([cliente_id, nombre])
+}
+
+model sucursales {
+  id              Int     @id @default(autoincrement())
+  municipio_id    Int
+  cliente_id      Int
+  nombre          String
+  direccion       String?
+  clave_signature String
+
+  // Relaciones -----
+  municipio municipios @relation(fields: [municipio_id], references: [id], onDelete: Restrict)
+  cliente   clientes   @relation(fields: [cliente_id], references: [id], onDelete: Restrict)
+
+  // Restricciones -----
+  claves claves[]
+
+  @@unique([cliente_id, clave_signature])
+}
+
+model claves {
+  id               Int    @id @default(autoincrement())
+  sucursal_id      Int
+  identificador_id Int
+  valor            String
+
+  // Relaciones -----
+  identificador identificadores @relation(fields: [identificador_id], references: [id], onDelete: Restrict)
+  sucursal      sucursales      @relation(fields: [sucursal_id], references: [id], onDelete: Cascade)
+
+  // Restricciones -----
+  @@unique([sucursal_id, identificador_id])
 }
