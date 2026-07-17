@@ -1,9 +1,16 @@
 import { z } from "@hono/zod-openapi";
 
-import type { EstadoDetailRaw } from "./read.ts";
-import { EstadoDetailSchema } from "../schemas/response.ts";
+import type { EstadoBasicRaw, EstadoDetailRaw } from "./read.ts";
+import { EstadoBasicSchema, EstadoDetailSchema } from "../schemas/response.ts";
 
 /** Convierte el detalle raw del estado a respuesta pública. */
+export const toEstadoBasic = (
+  estadoRaw: EstadoBasicRaw,
+): z.infer<typeof EstadoBasicSchema> => {
+  return {
+    ...estadoRaw,
+  };
+};
 export const toEstadoDetail = (
   estadoRaw: EstadoDetailRaw,
 ): z.infer<typeof EstadoDetailSchema> => {

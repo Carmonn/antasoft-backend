@@ -1,16 +1,10 @@
 import { z } from "@hono/zod-openapi";
 
-import { PersonaRawSchema } from "./raw.ts";
+import { PersonaRawSchema, ContactoRawSchema } from "./raw.ts";
 
 const ContactoInputSchema = z.object({
-  medio_id: z.coerce.number().int().positive().openapi({
-    example: 1,
-    description: "Identificador del medio de contacto.",
-  }),
-  valor: z.string().trim().min(1).openapi({
-    example: "5516766158",
-    description: "Valor del medio de contacto.",
-  }),
+  medio_id: ContactoRawSchema.shape.medio_id,
+  valor: ContactoRawSchema.shape.valor,
 });
 
 const CoberturaInputSchema = z.coerce.number().int().positive().openapi({

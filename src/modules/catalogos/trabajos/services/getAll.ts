@@ -1,7 +1,9 @@
 import { PrismaClient } from "@/generated/client.ts";
+
 import { listTrabajosBasicRaw } from "../repository/read.ts";
+import { toTrabajoBasic } from "../repository/mapper.ts";
 
 /** Lista trabajos */
 export const listTrabajosService = async (prisma: PrismaClient) => {
-  return await listTrabajosBasicRaw(prisma);
+  return (await listTrabajosBasicRaw(prisma)).map(toTrabajoBasic);
 };

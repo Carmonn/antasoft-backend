@@ -1,11 +1,21 @@
 import { z } from "@hono/zod-openapi";
 
-import type { ClienteDetailRaw } from "../schemas/repository.ts";
+import type {
+  ClienteBasicRaw,
+  ClienteDetailRaw,
+} from "../schemas/repository.ts";
 
-import { ClienteDetailSchema } from "../schemas/response.ts";
+import {
+  ClienteBasicSchema,
+  ClienteDetailSchema,
+} from "../schemas/response.ts";
 
 /** Convierte ClienteBasicRaw a una respuesta pública. */
-// export const toClienteBasic = (): {}
+export const toClienteBasic = (
+  clienteRaw: ClienteBasicRaw,
+): z.infer<typeof ClienteBasicSchema> => {
+  return { ...clienteRaw };
+};
 
 /** Convierte ClienteDetailRaw a una respuesta pública. */
 export const toClienteDetail = (
