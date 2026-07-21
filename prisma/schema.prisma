@@ -56,11 +56,17 @@ model medios {
 model trabajos {
   id     Int    @id @default(autoincrement())
   nombre String @unique
+
+  // Relaciones -----
+  asignaciones asignaciones[]
 }
 
 model estatus_asignaciones {
   id     Int    @id @default(autoincrement())
   nombre String @unique
+
+  // Relaciones -----
+  asignaciones asignaciones[]
 }
 
 model estatus_honorarios {
@@ -92,9 +98,11 @@ model contactos {
   persona_id Int
   valor      String
 
+  // Relaciones -----
   medio   medios   @relation(fields: [medio_id], references: [id])
   persona personas @relation(fields: [persona_id], references: [id], onDelete: Cascade)
 
+  // Restricciones -----
   @@unique([medio_id, persona_id, valor])
   @@index([persona_id])
 }
@@ -127,7 +135,9 @@ model usuarios {
   rol     roles    @relation(fields: [rol_id], references: [id], onDelete: Restrict)
   persona personas @relation(fields: [persona_id], references: [id], onDelete: Restrict)
 
-  permisos usuarios_permisos[]
+  permisos                 usuarios_permisos[]
+  asignaciones_responsable asignaciones[]      @relation("responsable")
+  asignaciones_asignado    asignaciones[]      @relation("asignado")
 
   // Restricciones -----
   @@index([rol_id])
@@ -206,9 +216,10 @@ model sucursales {
   municipio municipios @relation(fields: [municipio_id], references: [id], onDelete: Restrict)
   cliente   clientes   @relation(fields: [cliente_id], references: [id], onDelete: Restrict)
 
-  // Restricciones -----
-  claves claves[]
+  claves       claves[]
+  asignaciones asignaciones[]
 
+  // Restricciones -----
   @@unique([cliente_id, clave_signature])
 }
 
@@ -224,4 +235,26 @@ model claves {
 
   // Restricciones -----
   @@unique([sucursal_id, identificador_id])
+}
+
+//---------- Asignaciones ----------
+model asignaciones {
+  id                     Int       @id @default(autoincrement())
+  usuario_responsable_id Int
+  usuario_asignado_id    Int
+  trabajo_id             Int
+  sucursal_id            Int
+  estatus_asignacion_id  Int
+  fecha_asignacion       DateTime
+  fecha_completado       DateTime?
+
+  // Relaciones -----
+  trabajo             trabajos             @relation(fields: [trabajo_id], references: [id], onDelete: Restrict)
+  estatus_asignacion  estatus_asignaciones @relation(fields: [estatus_asignacion_id], references: [id], onDelete: Restrict)
+  sucursal            sucursales           @relation(fields: [sucursal_id], references: [id])
+  usuario_responsable usuarios             @relation("responsable", fields: [usuario_responsable_id], references: [id])
+  usuario_asignado    usuarios             @relation("asignado", fields: [usuario_asignado_id], references: [id])
+
+  // Restricciones -----
+  @@unique([sucursal_id, trabajo_id])
 }
