@@ -1,44 +1,43 @@
-```
 # Antasoft Backend API
 
-Backend de Antasoft construido con Deno, Hono y Prisma. Expone endpoints REST con especificación OpenAPI para catálogos del sistema.
+Backend de Antasoft construido con Deno, Hono y Prisma. Expone una API REST documentada con OpenAPI y organizada por dominios funcionales.
 
-## Situación Actual (2026-07-13)
+## Situación Actual (2026-07-22)
 
-Estado funcional del proyecto:
+Estado funcional confirmado en el código:
 
-- API levantando sobre Deno + Hono en puerto 8000.
-- Documentación OpenAPI disponible en /docs.
-- Catálogos activos con rutas de listado y detalle por id:
-	- estados
-	- municipios
-	- permisos
-	- medios
-	- trabajos
-	- estatus de asignaciones
-	- estatus de honorarios
-- Prisma configurado con SQLite/libSQL adapter.
-- Migraciones activas en prisma/migrations (migración inicial aplicada).
-- Seed implementado para catálogos.
-- Modelos de personas/contactos/cobertura definidos en Prisma, pero sin rutas expuestas en la API en este momento.
+- API activa sobre Deno + Hono en puerto 8000.
+- Documentación OpenAPI/Scalar publicada en /docs.
+- Prisma configurado con SQLite y adapter libSQL.
+- Migraciones activas en prisma/migrations.
+- Seed inicial implementado para catálogos, personas, usuarios y sucursales base.
+- Módulos activos en rutas:
+  - Catalogos
+  - Personas
+  - Usuarios
+  - Sucursales
+  - Asignaciones
+  - Honorarios
 
-## Stack Tecnológico
+## Stack Tecnologico
 
 - Deno 2.x
-- Hono + zod-openapi
+- Hono
+- @hono/zod-openapi
 - Prisma ORM 7.x
 - @prisma/adapter-libsql
 - SQLite (desarrollo local)
-- Scalar (referencia de API)
+- Scalar (API Reference UI)
 
 ## Requisitos
 
 - Deno instalado
-- Archivo .env en la raíz del proyecto
+- Archivo .env en la raiz del proyecto
+- Archivo seed.ts en prisma/seed/ para inicializar datos base
 
 ## Variables de Entorno
 
-Define al menos la URL de base de datos:
+Variable minima requerida:
 
 ```env
 DATABASE_URL="file:./dev.db"
@@ -46,30 +45,30 @@ DATABASE_URL="file:./dev.db"
 
 Notas:
 
-- Puedes usar otra ruta SQLite según tu entorno.
-- .env y archivos de base de datos local no deben versionarse.
+- Puedes ajustar la ruta SQLite para tu entorno local.
+- .env y los archivos de base local deben permanecer fuera del control de versiones.
 
-## Cómo Levantar el Proyecto
+## Como Levantar el Proyecto
 
-1. Generar cliente Prisma:
+1. Generar cliente Prisma.
 
 ```bash
 deno task prisma:generate
 ```
 
-2. Aplicar migraciones:
+2. Aplicar migraciones.
 
 ```bash
 deno task prisma:migrate
 ```
 
-3. Poblar catálogos iniciales:
+3. Ejecutar seed inicial.
 
 ```bash
 deno task prisma:seed
 ```
 
-4. Iniciar servidor:
+4. Iniciar API.
 
 ```bash
 deno task start
@@ -90,72 +89,81 @@ Accesos:
 - deno task prisma:reset
 - deno task prisma:studio
 
-## Endpoints Disponibles
+## Rutas Base Activas
 
-Base path: /catalogos
+Estas rutas estan registradas en la aplicacion:
 
-- GET /catalogos/estados
-- GET /catalogos/estados/:id
-- GET /catalogos/municipios
-- GET /catalogos/municipios/:id
-- GET /catalogos/permisos
-- GET /catalogos/permisos/:id
-- GET /catalogos/medios
-- GET /catalogos/medios/:id
-- GET /catalogos/trabajos
-- GET /catalogos/trabajos/:id
-- GET /catalogos/estatus-asignaciones
-- GET /catalogos/estatus-asignaciones/:id
-- GET /catalogos/estatus-honorarios
-- GET /catalogos/estatus-honorarios/:id
+- /catalogos/estados
+- /catalogos/municipios
+- /catalogos/permisos
+- /catalogos/medios
+- /catalogos/trabajos
+- /catalogos/estatus-asignaciones
+- /catalogos/estatus-honorarios
+- /personas
+- /usuarios/roles
+- /usuarios/usuarios
+- /sucursales/clientes
+- /sucursales/sucursales
+- /asignaciones
+- /honorarios
+
+En los modulos de negocio (personas, usuarios, sucursales, asignaciones, honorarios) ya existe soporte CRUD (listado, detalle por id, creacion, actualizacion y eliminacion). El detalle contractual de cada endpoint se consulta en /docs.
 
 ## Estructura Principal
 
 ```text
 src/
-	main.ts
-	modules/
-		catalogos/
-			estados/
-			municipios/
-			permisos/
-			medios/
-			trabajos/
-			estatusAsignaciones/
-			estatusHonorarios/
-		personas/               # estructura base, no expuesta en main.ts
-	generated/
-	shared/
+  main.ts
+  modules/
+    catalogos/
+    personas/
+    usuarios/
+    sucursales/
+    asignaciones/
+    honorarios/
+  generated/
+  shared/
 
 prisma/
-	schema.prisma
-	migrations/
-	seed/
+  schema.prisma
+  migrations/
+  seed/
 
-postman/                    # colecciones locales (ignorado por git)
+postman/
 ```
+
+## Modelo de Datos
+
+Dominios de datos actualmente modelados en Prisma:
+
+- Catalogos: estados, municipios, permisos, medios, trabajos, estatus_asignaciones, estatus_honorarios
+- Personas: personas, contactos, personas_municipios
+- Usuarios: roles, roles_permisos, usuarios, usuarios_permisos
+- Sucursales: clientes, identificadores, sucursales, claves
+- Operacion: asignaciones, honorarios
 
 ## Flujo Recomendado de Desarrollo
 
-1. Editar prisma/schema.prisma.
+1. Modificar prisma/schema.prisma.
 2. Ejecutar deno task prisma:migrate.
 3. Ejecutar deno task prisma:generate.
-4. Implementar/ajustar módulo (schemas, repository, services, handlers, routes).
-5. Actualizar seed si el catálogo lo requiere.
+4. Ajustar modulo afectado (schemas, repository, services, handlers, routes).
+5. Actualizar seed cuando agregues catalogos o datos base.
 
 ## Troubleshooting
 
-- Error de conexión a DB:
-	- Verifica DATABASE_URL y permisos de escritura del archivo SQLite.
+- Error de conexion a DB:
+  - Verifica DATABASE_URL y permisos de escritura del archivo SQLite.
 - Cliente Prisma desactualizado:
-	- Ejecuta deno task prisma:generate.
-- Datos duplicados o inconsistentes en local:
-	- Ejecuta deno task prisma:reset.
+  - Ejecuta deno task prisma:generate.
+- Datos locales inconsistentes:
+  - Ejecuta deno task prisma:reset.
 
 ## Seguridad
 
-- No commitear .env.
-- No commitear dev.db ni otros archivos SQLite.
-- No commitear dumps ni colecciones con secretos.
-- Mantener postman/ fuera del repositorio si contiene tokens o variables sensibles.
+- No subir .env.
+- No subir dev.db ni otros archivos SQLite locales.
+- No subir colecciones, dumps o exports con secretos.
+- Mantener postman fuera del repositorio si incluye tokens o credenciales.
 ```
