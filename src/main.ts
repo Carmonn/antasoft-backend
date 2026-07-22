@@ -25,6 +25,8 @@ import sucursalesRoutes from "@/modules/sucursales/sucursales/routes/router.ts";
 
 import asignacionesRoutes from "@/modules/asignaciones/routes/router.ts";
 
+import honorariosRoutes from "@/modules/honorarios/routes/router.ts";
+
 // ----- Type Definition on the app -----
 export type AppEnv = { Variables: { prisma: PrismaClient } };
 
@@ -86,6 +88,8 @@ app.route("/sucursales/clientes", clientesRoutes);
 app.route("/sucursales/sucursales", sucursalesRoutes);
 
 app.route("/asignaciones", asignacionesRoutes);
+
+app.route("/honorarios", honorariosRoutes);
 
 Deno.serve(app.fetch);
 console.log("📄 Docs: http://localhost:8000/docs");

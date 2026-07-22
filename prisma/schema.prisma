@@ -72,6 +72,9 @@ model estatus_asignaciones {
 model estatus_honorarios {
   id     Int    @id @default(autoincrement())
   nombre String @unique
+
+  // Relaciones -----
+  honorarios honorarios[]
 }
 
 //---------- Personas ----------
@@ -84,9 +87,10 @@ model personas {
   fecha_nacimiento DateTime?
 
   // Relaciones -----
-  contactos contactos[]
-  cobertura personas_municipios[]
-  usuarios  usuarios?
+  contactos  contactos[]
+  cobertura  personas_municipios[]
+  usuarios   usuarios?
+  honorarios honorarios[]
 
   // Restricciones -----
   @@unique([alias, nombre, apellido_paterno, apellido_materno])
@@ -254,7 +258,23 @@ model asignaciones {
   sucursal            sucursales           @relation(fields: [sucursal_id], references: [id])
   usuario_responsable usuarios             @relation("responsable", fields: [usuario_responsable_id], references: [id])
   usuario_asignado    usuarios             @relation("asignado", fields: [usuario_asignado_id], references: [id])
+  honorario           honorarios?
 
   // Restricciones -----
   @@unique([sucursal_id, trabajo_id])
+}
+
+//---------- Honorarios ----------
+model honorarios {
+  id                   Int       @id @default(autoincrement())
+  asignacion_id        Int       @unique(map: "unq_honorarios_asignacion_id")
+  persona_id           Int
+  estatus_honorario_id Int
+  fecha_solicitud      DateTime
+  fecha_resolucion     DateTime?
+
+  // Relaciones -----
+  asignacion        asignaciones       @relation(fields: [asignacion_id], references: [id], onDelete: Restrict)
+  persona           personas           @relation(fields: [persona_id], references: [id])
+  estatus_honorario estatus_honorarios @relation(fields: [estatus_honorario_id], references: [id])
 }
